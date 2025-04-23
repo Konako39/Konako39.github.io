@@ -377,6 +377,19 @@ body:not(.user-is-tabbing) a:focus {
     transition: all .2s;
 }
 
+/* 新添加的返回按钮样式 */
+.nav__link--back {
+    color: #fff; /* 字体颜色 */
+    background-color: var(--pink); /* 背景颜色 */
+    padding: 1rem 2rem; /* 增加内边距使按钮更明显 */
+    border-radius: 4px; /* 圆角边框 */
+}
+
+.nav__link--back:hover {
+    color: var(--white); /* 悬停时的字体颜色 */
+    background-color: #d11a40; /* 悬停时的背景颜色 */
+}
+
 .nav__link::after {
     content: '';
     position: absolute;
@@ -387,6 +400,11 @@ body:not(.user-is-tabbing) a:focus {
     height: 1rem;
     background: var(--white);
     transition: all 0.25s cubic-bezier(1, 0.68, 0.16, 0.9);
+}
+
+/* 下划线效果 */
+.nav__link--back:hover {
+    color: var(--pink);
 }
 
 .nav__link:hover {
