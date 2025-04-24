@@ -58,19 +58,19 @@
         <h2>ピクセルアート風の2Dゲーム</h2>
         <div class="work__boxes">
 
-          <!-- 带有work__box类的每个div代表一个项目。可以复制这个结构来添加更多项目 -->
+          <!-- 复制这个结构来添加更多项目 -->
 
           <div class="work__box">
             <div class="work__text">
               <h3>ゲーム紹介</h3>
               <p>
-                玩家在一个昏暗的洞穴醒来，前方只有一条路，在走到终点时会迎来一场大战。
+                プレイヤーは薄暗い洞窟で目を覚まし、前にはただ一つの道が続いている。道の終点では、大きな戦いが待ち受けている。
               </p>
               <p>
-                游戏为玩家设计了3个不同的技能来应对不同的攻击，每个技能的使用都伴随着风险，但同时也有对应的回报。
+                異なる攻撃に対応するために3種類のスキルが用意されている。それぞれのスキルにはリスクが伴うが、それに見合うリターンもある。
               </p>
               <p>
-                游戏一共有四种敌人，分别有不同的攻击方式，玩家需要采取不同的策略去击败敌人。
+                ゲームには4種類の敵が登場し、それぞれ異なる攻撃パターンを持つ。プレイヤーは状況に応じて異なる戦術を取る必要がある。
               </p>
               <ul class="work__list">
                 <!-- <li>Unity</li>
@@ -98,16 +98,22 @@
             <div class="work__text">
               <h3>キャラクターデザイン</h3>
               <p>
-                角色有三种技能，分别有不同的效果
+                キャラクターは以下3種類のアクションスキルを持ちます：
               </p>
               <ul class="work__list">
-                <li>冲刺</li>
-                <li>居合</li>
-                <li>格挡</li>
+                <li>ガードスキル</li>
+                <p>
+                  タイミングよく使用すれば、スタミナを回復し敵をスタンさせることも可能。
+                </p>
+                <li>一闪</li>
+                <p>
+                  チャージ後に高威力の一撃を放ち、攻撃中は無敵。ハイリスク・ハイリターン。
+                </p>
+                <li>ダッシュ</li>
+                <p>
+                  前方へ高速移動し、攻撃を回避できる。成功すればHPを回復。
+                </p>
               </ul>
-              <p>
-                冲刺技能会让玩家有一段短暂的冲锋
-              </p>
 <!-- 
               <div class="work__links">
                 <a href="#" class="link__text">
@@ -123,32 +129,113 @@
             </div>
           </div>
 
+
           <div class="work__box">
             <div class="work__text">
-              <h3>Notificator</h3>
+              <h3>ステータスシステム</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod,
-                eius.
+                ゲーム画面には、プレイヤーの各種ステータスゲージが表示されます。これにより、プレイヤーは戦況に応じて行動を判断しやすくなります。
               </p>
               <ul class="work__list">
-                <li>React</li>
-                <li>Next.js</li>
-                <li>Node</li>
-                <li>MongoDB</li>
+                <li>体力(赤)</li>
+                <p>
+                  敵の攻撃を受けると減少。ゼロになるとゲームオーバー。一部の精密アクション成功時に回復可能。
+                </p>
+                <li>体力値(緑)</li>
+                <p>
+                  ガードやダッシュなどの行動で消費。時間経過で自動回復。スタミナが不足すると一部行動が使えなくなる。
+                </p>
+                <li>スキルゲージ</li>
+                <p>
+                  時間経過または特定行動でチャージ。満タンになると「スキルポイント」が1つ加算される。
+                </p>
+                <li>スキルポイント</li>
+                <p>
+                  一闪（高威力スキル）の使用に必要なリソース。リスクを取って正確なタイミングで使えば、消費したSPが返還されることもある。
+                </p>
+              </ul>
+              <ul class="work__list">
+                <!-- <li>Unity</li>
+                <li>C#</li>
+                <li>NewInputSystem</li>
+                <li>ACT</li> -->
               </ul>
 
               <div class="work__links">
+                <!-- <a href="准备填写作品详细网站" target="_blank" class="link__text">
+                  詳しい内容 <span>&rarr;</span>
+                </a> -->
+                <!-- <a href="https://github.com/nisarhassan12/portfolio" title="View Source Code" target="_blank">
+                  <img src="./images/github.svg" class="work__code" alt="GitHub">
+                </a> -->
+                <!-- ソースコードは非公開 -->
+              </div>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/zhuangtai.gif" class="work__image" alt="Project 1" />
+            </div>
+          </div>
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>敵キャラクター</h3>
+              <p>
+                本作には4タイプの敵が登場：
+              </p>
+              <ul class="work__list">
+                <li>突進型(キノコ)</li>
+                <p>
+                  視界に入ると高速で突進。正面からの攻撃には強い耐性あり。
+                </p>
+                <li>飛行型(蝙蝠)</li>
+                <p>
+                  空中を自在に移動し、遠距離から急接近して攻撃。
+                </p>
+                <li>待機型(ウイザード)</li>
+                <p>
+                  追撃の前その場に留まり、高威力の範囲攻撃を繰り出す。
+                </p>
+                <li>ボス</li>
+                <p>
+                  様々な攻撃パターンとAIを持ち、プレイヤーに多くの判断を迫る存在。
+                </p>
+              </ul>
+
+              <!-- <div class="work__links">
                 <a href="#" class="link__text">
                   Visit Site <span>&rarr;</span>
                 </a>
                 <a href="#">
                   <img src="./images/github.svg" class="work__code" title="View Source Code" alt="GitHub">
                 </a>
-              </div>
+              </div> -->
             </div>
             <div class="work__image-box">
-              <img src="./images/project-3.png" class="work__image" alt="Project 3" />
+              <img src="./images/teki.gif" class="work__image" alt="Project 3" />
             </div>
+          </div>
+          <div class="work__box">
+            <div class="work__text">
+              <h3>ストーリー</h3>
+              <p>
+                プレイヤーは、ゲーム内のオブジェクトやNPCと交流することで、ゲームのストーリーを知ることができます。
+              </p>
+              <ul class="work__list">
+                <p>
+                  プレイヤーはゲーム中でさまざまなNPCと出会います。彼らはそれぞれ異なる目的を持ち、言葉を通じてプレイヤーを次の行動を誘導します。
+                  各周回では、プレイヤーの行動によって世界が変化し、その結果エンディングにも影響がある。
+                </p>
+              </ul>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/story.png" class="work__image" alt="Project 3" />
+            </div>
+          </div>
+
+
+
+
+          </div>
           </div>
         </div>
       </div>
@@ -169,29 +256,29 @@
         </div>
       </div>
     </section> -->
-    <!-- 不需要这个 可以改成新模块-->
+    <!-- 不需要这个-->
 
-    <!-- ***** 关于我 ***** -->
+    <!-- ***** ボス介绍 ***** -->
 
     <section class="about" id="about">
       <div class="row">
-        <h2>About Me</h2>
+        <h2>BOSS</h2>
         <div class="about__content">
           <div class="about__text">
 
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos id
-              nostrum illo harum blanditiis, tenetur eum suscipit cupiditate
-              in vel, ex quam quidem quos mollitia labore aut sunt eius
-              ratione molestiae fuga veniam facere similique voluptate.
+              ボスは「通常攻撃」「三連撃」「瞬間移動斬り」「回復」など4つの行動がある。さらに「構えゲージ（スタンス）」が存在し、削り切ることで一時的にスタン状態に移行します。
+            </p>
+            <p>
+              プレイヤーは、どのスキルをいつ使うかの判断が重要で、ただ攻撃するだけでは勝てません。勝つためには、自分のスキルを的確に使いこなす必要があります。
             </p>
             <!-- 提供一个链接-->
-            <a href="#" class="btn">My Resume</a>
+            <!-- <a href="#" class="btn">My Resume</a> -->
           </div>
 
           <div class="about__photo-container">
             <!-- 300x300像素 -->
-            <img class="about__photo" src="./images/syed-ali-hussnain.jpg" alt="" />
+            <img class="about__photo" src="./images/samurai.gif" alt="" />
           </div>
         </div>
       </div>
@@ -202,18 +289,27 @@
 
   <section class="contact" id="contact">
     <div class="row">
-      <h2>Get in Touch</h2>
+      <h2>現在の状況</h2>
       <div class="contact__info">
         <p>
-          Are you looking for a fast-performing and user-friendly website to
-          represent your product or business? or looking for any kind of
-          consultation? or want to ask questions? or have some advice for me
-          or just want to say "Hi 👋" in any case feel free to Let me know. I
-          will do my best to respond back. 😊 The quickest way to reach out to
-          me is via an email.
+          ゲームはすでに基本的な機能をすべて実装済みで、コードも清晰かつ健壮ですが、プレイの多様性とストーリーには課題があります。今後の開発では、育成要素の追加とストーリーの充実を予定しています。
         </p>
-        <!-- 电子邮件 -->
-        <a href="mailto:you@example.com" class="btn">you@example.com</a>
+        <p>
+          操作方法:
+          <ul>
+          <li>W / D：移動 </li>
+          <li>SPACE：ジャンプ  </li>
+          <li>J：攻撃  </li>
+          <li>K：ダッシュ</li>
+          <li>L：ガード  </li>
+          <li>U：一閃  </li>
+          </ul>
+          <p></p>
+          C：ボス戦前の位置へ瞬間移動<p></p>
+          WebGL版では、GitHubにデプロイした際に原因不明のバグが発生し、ボス戦中にボスのHPバーや被弾時の効果音が表示・再生されなくなる現象があります。
+        </p>
+        <a target="_blank" href="https://konako39.github.io/2d_actgame/" class="btn btn--pink">WebGL版でプレイ</a>
+        <a href="../../index.html" class="btn">戻る</a>
       </div>
     </div>
   </section>
@@ -223,7 +319,7 @@
   <footer role="contentinfo" class="footer">
     <div class="row">
       <!-- 社交媒体账户 -->
-      <ul class="footer__social-links">
+      <!-- <ul class="footer__social-links">
         <li class="footer__social-link-item">
           <a href="https://twitter.com/nisarhassan12/" title="Link to Twitter Profile">
             <img src="./images/twitter.svg" class="footer__social-image" alt="Twitter">
@@ -244,11 +340,14 @@
             <img src="./images/linkedin.svg" title="Link to Linkedin Profile" class="footer__social-image" alt="Linkedin">
           </a>
         </li>
-      </ul>
+      </ul> -->
 
       <!-- If you give me some credit by keeping the below paragraph, will be huge for me 😊 Thanks. -->
       <p>
-        来源 <a href="https://github.com/nisarhassan12/portfolio-template" class="link">GitHub</a>.
+        本サイトのソースコード：<a target="_blank" href="https://github.com/Konako39/Konako39.github.io" class="link">GitHub</a>
+      </p>
+      <p>
+        テンプレートの出典：<a target="_blank" href="https://github.com/nisarhassan12/portfolio-template" class="link">GitHub</a>
       </p>
       <!-- <div class="footer__github-buttons">
         <iframe
