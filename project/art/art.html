@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" type="image/png" href="images/icon.png" />
+
+  <!-- 网站标题 -->
+  <title>
+    「ART」
+  </title>
+
+  <meta name="description" content="作品集">
+  <meta name="keywords" content="宋立" />
+  <link rel="stylesheet" href="art.css" />
+  <style>
+    /* 图片放大相关样式 */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1000; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      background-color: rgba(0,0,0,0.9); 
+      overflow: auto;
+    }
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .work__image {
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .work__image:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ***** 页头 ***** -->
+
+  <header class="header" role="banner" id="top">
+    <div class="row">
+      <nav class="nav" role="navigation">
+        <ul class="nav__items">
+        </ul>
+      </nav>
+    </div>
+    <div class="header__text-box row">
+      <div class="header__text">
+        <h1 class="heading-primary">
+          <!--网站的主标题 -->
+          <span>アート</span>
+        </h1>
+        <!-- 简短介绍 -->
+        <p>筆を使って色彩を遊ぶ</p>
+        <a href="../../index.html" class="btn btn--pink">戻る</a>
+        
+      </div>
+    </div>
+  </header>
+
+  <main role="main">
+
+    <!-- ***** 作品展示 ***** -->
+
+    <section class="work" id="work">
+      <div class="row">
+        <h2>絵画·模写</h2>
+        <div class="work__boxes">
+
+          <!-- 复制这个结构来添加更多项目 -->
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>冰山</h3>
+              <p>
+                处于蓝色海上的冰块遗迹。
+              </p>
+
+
+              <div class="work__links">
+
+              </div>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/bingshan.png" class="work__image" alt="blender" />
+            </div>
+          </div>
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>城堡</h3>
+              <p>
+                法师们正在前往魔法之都。
+              </p>
+
+
+            </div>
+            <div class="work__image-box">
+              <img src="./images/chengbao.png" class="work__image" alt="Project 1" />
+            </div>
+          </div>
+
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>稻妻</h3>
+              <p>
+                原神的场景，练习色彩。
+              </p>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/daoqi.png" class="work__image" alt="Project 1" />
+            </div>
+          </div>
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>秋天</h3>
+              <p>
+                身着蓝色外套的旅人驾驶着小船，打破了平静的色彩。
+              </p>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/fengye.png" class="work__image" alt="Project 1" />
+            </div>
+          </div>
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>火海の上で</h3>
+              <p>
+                一个少年在山崖上盯着燃烧的村落沉默着。
+              </p>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/huoyan.png" class="work__image" alt="Project 1" />
+            </div>
+          </div>
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>リンク</h3>
+              <p>
+                塞尔达传说·王国之泪的场景。
+              </p>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/Link.png" class="work__image" alt="Project 1" />
+            </div>
+          </div>
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>Loser</h3>
+              <p>
+                长发男子在天台跳舞。仅用了模糊的轮廓描写。
+              </p>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/loser.png" class="work__image" alt="Project 1" />
+            </div>
+          </div>
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>魔女</h3>
+              <p>
+                水星的魔女 动漫OP的场景
+              </p>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/majyo.png" class="work__image" alt="art" />
+            </div>
+          </div>
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>黑白临摹</h3>
+              <p>
+                为练习色彩掌控临摹的未来城市与遗迹。
+              </p>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/city.png" class="work__image" alt="art" />
+              <img src="./images/yuusya.png" class="work__image" alt="art" />
+            </div>
+          </div>
+
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- *****  ***** -->
+
+  <!-- <section class="contact" id="contact">
+    <div class="row">
+      <h2>現在の状況</h2>
+      <div class="contact__info">
+        <p>
+          UnityとDiscordの双方向通信機能はすでに完成しており、好感度による応答の変化も実装済みです。対話履歴はLeanCloudのクラウドデータベースに保存され、正しく読み込むことができます。
+        </p>
+        <p>
+          しかし、現段階ではシステム構成が比較的シンプルであり、好感度や記憶も静的なプロンプトに依存しているため、対話が続くと一定の段階でLuxが過去の内容を忘れてしまう問題があります。また、感情の表現も限られていて、自由に変化させるのが難しいです。
+        </p>
+        <p>
+          今後の開発の方向性：
+        </p>
+        <ul class="work__list">
+          <li>RAG技術を導入、記憶システムを再構築する</li>
+          <li>記憶に環境情報などの変数を加え、Luxが自分の状況をより明確に把握できるようにする</li>
+          <li>ゲームシステムの拡張を通じて、大規模言語モデルとの双方向的な連携を実現する</li>
+        </ul>        
+        </p>
+        </p>
+        <a class="btn btn--pink" style="cursor: not-allowed; opacity: 0.7;" title="WebGL版今开发中">WebGL版でプレイ</a>
+        <a href="../../index.html" class="btn">戻る</a>
+        
+      </div>
+    </div>
+  </section> -->
+  <div style="text-align: center; margin: 8rem 0;">
+    <a href="../../index.html" class="btn">戻る</a>
+  </div>
+
+  <!-- ***** 页脚 ***** -->
+
+  <footer role="contentinfo" class="footer">
+    <div class="row">
+      <p>
+        本サイトのソースコード：<a target="_blank" href="https://github.com/Konako39/Konako39.github.io" class="link">GitHub</a>
+      </p>
+      <p>
+        テンプレートの出典：<a target="_blank" href="https://github.com/nisarhassan12/portfolio-template" class="link">GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <a href="#top" class="back-to-top" title="Back to Top">
+    
+    <img src="./images/arrow-up.svg" alt="Back to Top" class="back-to-top__image"/>
+  </a>
+  
+  <!-- 图片放大的模态框 -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImg">
+  </div>
+
+  <script src="./art.js"></script>
+  <script>
+    // 图片点击放大功能
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    
+    // 获取所有work__image类的图片
+    const images = document.getElementsByClassName("work__image");
+    
+    // 为每个图片添加点击事件
+    for(let i = 0; i < images.length; i++) {
+      images[i].onclick = function() {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+      }
+    }
+    
+    // 点击关闭按钮关闭模态框
+    closeBtn.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // 点击模态框外部关闭
+    modal.onclick = function(event) {
+      if(event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // 背景颜色渐变效果
+    window.addEventListener('scroll', function() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = scrollTop / totalHeight;
+      
+      // 设置初始颜色 (RGB格式)
+      const startColor = {r: 0, g: 0, b: 0}; // 黑色
+      // 设置目标颜色 (RGB格式)
+      const endColor = {r: 0, g: 206, b: 209}; // 天蓝
+      
+      // 计算当前颜色
+      const currentR = Math.round(startColor.r + (endColor.r - startColor.r) * scrollPercent);
+      const currentG = Math.round(startColor.g + (endColor.g - startColor.g) * scrollPercent);
+      const currentB = Math.round(startColor.b + (endColor.b - startColor.b) * scrollPercent);
+      
+      // 应用渐变色
+      document.body.style.backgroundColor = `rgb(${currentR}, ${currentG}, ${currentB})`;
+    });
+  </script>
+</body>
+
+</html>

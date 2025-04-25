@@ -34,7 +34,7 @@
           <span>「Lux」</span>
         </h1>
         <!-- 简短介绍 -->
-        <p>クロスプラットフォーム対応のNPC通信。Discordで、ゲーム内にいるLuxに話しかけてみよう！</p>
+        <p>クロスプラットフォーム対応のNPC通信。Discordで、ゲーム内にいるLuxに話しかけてみよう</p>
         <a href="../../index.html" class="btn btn--pink">戻る</a>
         
       </div>
@@ -47,144 +47,71 @@
 
     <section class="work" id="work">
       <div class="row">
-        <h2>ピクセルアート風の2Dスマホゲーム</h2>
+        <h2>LLMを活用したクロスプラットフォーム対話データ流通の実現</h2>
         <div class="work__boxes">
 
           <!-- 复制这个结构来添加更多项目 -->
 
           <div class="work__box">
             <div class="work__text">
-              <h3>ゲーム紹介</h3>
+              <h3> システム紹介</h3>
               <p>
-                プレイヤーは魔法が使える黒猫となって、ステージの最上部にある魚を目指してひたすらジャンプしていきます…
+                プレイヤーはゲーム内およびDiscord上でNPC「Lux」と会話することができ、Luxはプラットフォームを問わず、プレイヤーの名前・行動・感情的な傾向を記憶します。
               </p>
               <p>
-                万が一足を滑らせて落下しても、集めたエネルギーを使って魔法を発動し、直前の位置まで戻ることができます。
+                Luxには好感度システムが実装されており、好感度が上昇するのは、ゲーム内で「対面」での交流が行われた場合に限られます。
               </p>
               <p>
-                各ステージをクリアするたびに、プレイヤーは新たな能力を獲得できます。
+                ゲーム内では、会話以外の行動によってもLuxの好感度を上げることが可能です。
               </p>
-              <ul class="work__list">
-                <!-- <li>Unity</li>
-                <li>C#</li>
-                <li>NewInputSystem</li>
-                <li>ACT</li> -->
-              </ul>
+              <p>
+                画像の中では好感度が1なので、Luxはちょっと嫌そうな感じ...
+              </p>
 
               <div class="work__links">
-                <!-- <a href="准备填写作品详细网站" target="_blank" class="link__text">
-                  詳しい内容 <span>&rarr;</span>
-                </a> -->
-                <!-- <a href="https://github.com/nisarhassan12/portfolio" title="View Source Code" target="_blank">
-                  <img src="./images/github.svg" class="work__code" alt="GitHub">
-                </a> -->
-                <!-- ソースコードは非公開 -->
+
               </div>
             </div>
             <div class="work__image-box">
-              <img src="./images/jieshao.png" class="work__image" alt="Project 1" />
+              <img src="./images/llm.png" class="work__image" alt="Project 1" />
             </div>
           </div>
 
           <div class="work__box">
             <div class="work__text">
-              <h3>キャラクターデザイン</h3>
-              <p>プレイヤーができる操作は、たったの2つです。</p>
-
-              <ul>
-                <li><strong>ジャンプ</strong><br>
-                  魔法の黒猫は、画面をタップしている時間に応じてジャンプの高さが変わります。
-                </li>
-                <li><strong>魔法</strong><br>
-                  落下してしまった場合でも、魔力ゲージが満タンであれば、魔法を使って直前の位置に戻ることができます。
-                </li>
-              </ul>
-<!-- 
+              <h3>原理</h3>
+              <p>本システムは大型言語モデル（LLM）を中核に据え、DeepSeek-R1モデルを呼び出して応答を生成します。<p></p>
+                すべての対話データはクラウドデータベースに保存され、異なるプラットフォーム間で対話を行う際には、データベースからチャット履歴や好感度などの情報を取得します。<p></p>
+                プレイヤーの発言はすべて記録され、新たなプロンプトを構築する際に利用され、Luxは現在の「好感度」状態に応じた応答を返す仕組みとなっています。</p>
+              <p>
+                原理の詳細はarXivに掲載しています↓
+              </p>
               <div class="work__links">
-                <a href="#" class="link__text">
-                  Visit Site <span>&rarr;</span>
+                <a target="_blank" href="https://arxiv.org/pdf/2504.13928">
+                  <img src="./images/arxiv.png" class="work__code" title="paper" alt="GitHub">
                 </a>
-                <a href="#">
-                  <img src="./images/github.svg" class="work__code" title="View Source Code" alt="GitHub">
-                </a>
-              </div> -->
+              </div>
             </div>
             <div class="work__image-box">
-              <img src="./images/player.gif" class="work__image" alt="Project 1" />
+              <img src="./images/liuchengtu.png" class="work__image" alt="Project 1" />
             </div>
           </div>
 
 
           <div class="work__box">
             <div class="work__text">
-              <h3>ストーリー</h3>
-              <p>
-                ゲーム内には、さまざまなNPCが登場します。その中でも代表的なのが、カラスと海賊ネコです。
-              </p>
-              <p>
-                カラスは各所に現れ、プレイヤーにゲームの遊び方やステージクリアのヒントを教えてくれます。
-              </p>
-              <p>
-                一方、海賊ネコは主人公と同じく上を目指してジャンプしている仲間で、ステージが進むにつれて、主人公との絆も少しずつ深まっていきます。
-              </p>
+              <h3>想定される応用シーン</h3>
+              <ul class="work__list">
+                <li>LLM駆動型NPCゲーム</li>
+                <li>ソーシャルシミュレーション・育成ゲーム向けNPCプロトタイプ</li>
+                <li>執事型NPCプロトタイプ</li>
+                <li>クロスプラットフォーム学習型NPCプロトタイプ</li>
+              </ul>              
             </div>
             <div class="work__image-box">
-              <img src="./images/npc.gif" class="work__image" alt="Project 1" />
+              <img src="./images/lux.png" class="work__image" alt="Project 1" />
             </div>
           </div>
-
-          <div class="work__box">
-            <div class="work__text">
-              <h3>ステージ紹介</h3>
-              <p>
-                現在、本作には2つのステージがあります。
-              </p>
-              
-              <ul class="work__list">
-                <li>第1ステージ：屋上</li>
-                <p>
-                  プレイヤーはビルの最下層からスタートし、ひさしを使って上へとジャンプしていきます。このステージにはマップ全体に魚が散らばっており、魚を食べると魔力ゲージが回復します。クリアすると、最大魔力が2倍になり、一度に2回まで魔法が使えるようになります。
-                </p>
-              
-                <li>第2ステージ：雲の上</li>
-                <p>
-                  第1ステージをクリアすると、プレイヤーは雲の上に到達します。このステージでは、魚の代わりにクッキーが登場し、より多くの魔力を得ることができます。
-                </p>
-              </ul>
-
-              <!-- <div class="work__links">
-                <a href="#" class="link__text">
-                  Visit Site <span>&rarr;</span>
-                </a>
-                <a href="#">
-                  <img src="./images/github.svg" class="work__code" title="View Source Code" alt="GitHub">
-                </a>
-              </div> -->
-            </div>
-            <div class="work__image-box">
-              <img src="./images/level.png" class="work__image" alt="Project 3" />
-            </div>
-          </div>
-
-
-          <!-- <div class="work__box">
-            <div class="work__text">
-              <h3>ストーリー</h3>
-              <p>
-                プレイヤーは、ゲーム内のオブジェクトやNPCと交流することで、ゲームのストーリーを知ることができます。
-              </p>
-              <ul class="work__list">
-                <p>
-                  プレイヤーはゲーム中でさまざまなNPCと出会います。彼らはそれぞれ異なる目的を持ち、言葉を通じてプレイヤーを次の行動を誘導します。
-                  各周回では、プレイヤーの行動によって世界が変化し、その結果エンディングにも影響がある。
-                </p>
-              </ul>
-            </div>
-            <div class="work__image-box">
-              <img src="./images/story.png" class="work__image" alt="Project 3" />
-            </div>
-          </div> -->
-
 
 
 
@@ -194,63 +121,31 @@
       </div>
     </section>
 
-    <!-- ***** 客户 ***** -->
-
-    <!-- <section class="client" id="clients">
-      <div class="row">
-        <h2>Clients</h2>
-        <div class="client__logos">
-          <img src="./images/ronjones.png" class="client__logo" alt="Company 2" />
-          <img src="./images/goldengrid.png" class="client__logo" alt="Company 3" />
-          <img src="./images/bullseye.png" class="client__logo" alt="Company 1" />
-          <img src="./images/mighty-furnitures.png" class="client__logo" alt="Company 1" />
-          <img src="./images/fastlane.png" class="client__logo" alt="Company 3" />
-          <img src="./images/chippy.png" class="client__logo" alt="Company 1" />
-        </div>
-      </div>
-    </section> -->
-    <!-- 不需要这个-->
-
-    <!-- ***** ボス介绍 ***** -->
-<!-- 
-    <section class="about" id="about">
-      <div class="row">
-        <h2>BOSS</h2>
-        <div class="about__content">
-          <div class="about__text">
-
-            <p>
-              ボスは「通常攻撃」「三連撃」「瞬間移動斬り」「回復」など4つの行動がある。さらに「構えゲージ（スタンス）」が存在し、削り切ることで一時的にスタン状態に移行します。
-            </p>
-            <p>
-              プレイヤーは、どのスキルをいつ使うかの判断が重要で、ただ攻撃するだけでは勝てません。勝つためには、自分のスキルを的確に使いこなす必要があります。
-            </p>
-          </div>
-          <div class="about__photo-container">
-            <img class="about__photo" src="./images/samurai.gif" alt="" />
-          </div>
-        </div>
-      </div>
-    </section> -->
   </main>
 
-  <!-- ***** 联系方式 ***** -->
+  <!-- *****  ***** -->
 
   <section class="contact" id="contact">
     <div class="row">
       <h2>現在の状況</h2>
       <div class="contact__info">
         <p>
-          第1ステージはすべて完成しており、第2ステージもほぼ完成しています。各ステージクリア後に得られる育成・強化要素に焦点を当てたゲームプレイの設計を進めていく予定です。
+          UnityとDiscordの双方向通信機能はすでに完成しており、好感度による応答の変化も実装済みです。対話履歴はLeanCloudのクラウドデータベースに保存され、正しく読み込むことができます。
         </p>
         <p>
-          ゲームの基本的な機能は一通り実装されていますが、ステージクリア後の管理システムがまだ不足しています。
+          しかし、現段階ではシステム構成が比較的シンプルであり、好感度や記憶も静的なプロンプトに依存しているため、対話が続くと一定の段階でLuxが過去の内容を忘れてしまう問題があります。また、感情の表現も限られていて、自由に変化させるのが難しいです。
         </p>
         <p>
-          また、現時点ではコード全体が煩雑で拡張性に欠けるため、今後も開発を続けるのであれば、コードの全面的な書き直しは不可欠だと考えています。
+          今後の開発の方向性：
+        </p>
+        <ul class="work__list">
+          <li>RAG技術を導入、記憶システムを再構築する</li>
+          <li>記憶に環境情報などの変数を加え、Luxが自分の状況をより明確に把握できるようにする</li>
+          <li>ゲームシステムの拡張を通じて、大規模言語モデルとの双方向的な連携を実現する</li>
+        </ul>        
         </p>
         </p>
-        <a target="_blank" href="https://konako39.github.io/cat_game/" class="btn btn--pink">WebGL版でプレイ</a>
+        <a class="btn btn--pink" style="cursor: not-allowed; opacity: 0.7;" title="WebGL版今开发中">WebGL版でプレイ</a>
         <a href="../../index.html" class="btn">戻る</a>
         
       </div>
@@ -261,43 +156,12 @@
 
   <footer role="contentinfo" class="footer">
     <div class="row">
-      <!-- 社交媒体账户 -->
-      <!-- <ul class="footer__social-links">
-        <li class="footer__social-link-item">
-          <a href="https://twitter.com/nisarhassan12/" title="Link to Twitter Profile">
-            <img src="./images/twitter.svg" class="footer__social-image" alt="Twitter">
-          </a>
-        </li>
-        <li class="footer__social-link-item">
-          <a href="https://github.com/nisarhassan12/" title="Link to Github Profile">
-            <img src="./images/github.svg" class="footer__social-image" alt="Github">
-          </a>
-        </li>
-        <li class="footer__social-link-item">
-          <a href="https://codepen.io/nisar_hassan" title="Link to Codepen Profile">
-            <img src="./images/codepen.svg" class="footer__social-image" alt="Codepen">
-          </a>
-        </li>
-        <li class="footer__social-link-item">
-          <a href=https://www.linkedin.com/in/nisar-hassan-naqvi-413466199/">
-            <img src="./images/linkedin.svg" title="Link to Linkedin Profile" class="footer__social-image" alt="Linkedin">
-          </a>
-        </li>
-      </ul> -->
-
-      <!-- If you give me some credit by keeping the below paragraph, will be huge for me 😊 Thanks. -->
       <p>
         本サイトのソースコード：<a target="_blank" href="https://github.com/Konako39/Konako39.github.io" class="link">GitHub</a>
       </p>
       <p>
         テンプレートの出典：<a target="_blank" href="https://github.com/nisarhassan12/portfolio-template" class="link">GitHub</a>
       </p>
-      <!-- <div class="footer__github-buttons">
-        <iframe
-          src="https://ghbtns.com/github-btn.html?user=nisarhassan12&repo=portfolio-template&type=watch&count=true"
-          frameborder="0" scrolling="0" width="170" height="20" title="Watch Portfolio Template on GitHub">
-        </iframe>
-      </div> -->
     </div>
   </footer>
 

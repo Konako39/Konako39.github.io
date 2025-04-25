@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" type="image/png" href="images/icon.png" />
+
+  <!-- 网站标题 -->
+  <title>
+    「モデリング」
+  </title>
+
+  <meta name="description" content="作品集">
+  <meta name="keywords" content="宋立" />
+  <link rel="stylesheet" href="blender.css" />
+  <style>
+    /* 图片放大相关样式 */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1000; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      background-color: rgba(0,0,0,0.9); 
+      overflow: auto;
+    }
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .work__image {
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .work__image:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ***** 页头 ***** -->
+
+  <header class="header" role="banner" id="top">
+    <div class="row">
+      <nav class="nav" role="navigation">
+        <ul class="nav__items">
+        </ul>
+      </nav>
+    </div>
+    <div class="header__text-box row">
+      <div class="header__text">
+        <h1 class="heading-primary">
+          <!--网站的主标题 -->
+          <span>モデリング</span>
+        </h1>
+        <!-- 简短介绍 -->
+        <p>コンピュータとBlenderを使って、頭の中のイメージを形にする</p>
+        <a href="../../index.html" class="btn btn--pink">戻る</a>
+        
+      </div>
+    </div>
+  </header>
+
+  <main role="main">
+
+    <!-- ***** 作品展示 ***** -->
+
+    <section class="work" id="work">
+      <div class="row">
+        <h2>Blender建模/渲染</h2>
+        <div class="work__boxes">
+
+          <!-- 复制这个结构来添加更多项目 -->
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>中国宜賓・流觴曲水</h3>
+              <p>
+                私の大学は宜賓にあります。宜賓の流杯池公園には、王羲之の『蘭亭序』にある「流觴曲水」の意を模して作られた景観があります。
+              </p>
+              <p>
+                Blenderでモデリングとレンダリングを行い、WorldCreatorで地形を編集し、完成後はUnityにインポートしてVR観光プロジェクトを制作しました。
+              </p>
+
+              <div class="work__links">
+
+              </div>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/liushangqushui.png" class="work__image" alt="blender" />
+              <img src="./images/VR.gif" class="work__image" alt="blender" />
+            </div>
+          </div>
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>写実的な木造小屋</h3>
+              <p>
+                素材からこだわり、リアルな質感を目指してモデリングを行いました。
+              </p>
+              <p>
+                Blenderでモデリングとレンダリングを行い、Substance 3D Painterでマテリアルを編集しました。
+              </p>
+
+            </div>
+            <div class="work__image-box">
+              <img src="./images/muwu.png" class="work__image" alt="Project 1" />
+            </div>
+          </div>
+
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>教室</h3>
+              <p>
+                『ブルーアーカイブ』というゲームをプレイしたことがあり、これはその中に登場する教室のシーンです。
+              </p>
+              <p>
+                Blenderでモデリングとレンダリングを行い、アニメ風のレンダリングに挑戦しました。
+              </p>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/BA.png" class="work__image" alt="Project 1" />
+            </div>
+          </div>
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>浴室</h3>
+              <p>
+                Blenderを用いて、丸みのある浴室を表現しました。
+              </p>
+              <p>
+                カメラはオルソグラフィックを使用し、正方形の小さな浴室の印象を演出しました。
+              </p>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/wc.png" class="work__image" alt="Project 1" />
+            </div>
+          </div>
+
+          <div class="work__box">
+            <div class="work__text">
+              <h3>初音ミク</h3>
+              <p>
+                2024年末に初音ミクのライブを観に行き、感動が忘れられず、創作のきっかけになりました。
+              </p>
+              <p>
+                BlenderとMMD_Toolsプラグインを使用し、モデルとダンスモーションを用いてMMD動画を制作しました。
+              </p>
+            </div>
+            <div class="work__image-box">
+              <img src="./images/miku.gif" class="work__image" alt="Project 1" />
+            </div>
+          </div>
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- *****  ***** -->
+
+  <!-- <section class="contact" id="contact">
+    <div class="row">
+      <h2>現在の状況</h2>
+      <div class="contact__info">
+        <p>
+          UnityとDiscordの双方向通信機能はすでに完成しており、好感度による応答の変化も実装済みです。対話履歴はLeanCloudのクラウドデータベースに保存され、正しく読み込むことができます。
+        </p>
+        <p>
+          しかし、現段階ではシステム構成が比較的シンプルであり、好感度や記憶も静的なプロンプトに依存しているため、対話が続くと一定の段階でLuxが過去の内容を忘れてしまう問題があります。また、感情の表現も限られていて、自由に変化させるのが難しいです。
+        </p>
+        <p>
+          今後の開発の方向性：
+        </p>
+        <ul class="work__list">
+          <li>RAG技術を導入、記憶システムを再構築する</li>
+          <li>記憶に環境情報などの変数を加え、Luxが自分の状況をより明確に把握できるようにする</li>
+          <li>ゲームシステムの拡張を通じて、大規模言語モデルとの双方向的な連携を実現する</li>
+        </ul>        
+        </p>
+        </p>
+        <a class="btn btn--pink" style="cursor: not-allowed; opacity: 0.7;" title="WebGL版今开发中">WebGL版でプレイ</a>
+        <a href="../../index.html" class="btn">戻る</a>
+        
+      </div>
+    </div>
+  </section> -->
+  <div style="text-align: center; margin: 8rem 0;">
+    <a href="../../index.html" class="btn">戻る</a>
+  </div>
+
+  <!-- ***** 页脚 ***** -->
+
+  <footer role="contentinfo" class="footer">
+    <div class="row">
+      <p>
+        本サイトのソースコード：<a target="_blank" href="https://github.com/Konako39/Konako39.github.io" class="link">GitHub</a>
+      </p>
+      <p>
+        テンプレートの出典：<a target="_blank" href="https://github.com/nisarhassan12/portfolio-template" class="link">GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <a href="#top" class="back-to-top" title="Back to Top">
+    
+    <img src="./images/arrow-up.svg" alt="Back to Top" class="back-to-top__image"/>
+  </a>
+  
+  <!-- 图片放大的模态框 -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImg">
+  </div>
+
+  <script src="./blender.js"></script>
+  <script>
+    // 图片点击放大功能
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    
+    // 获取所有work__image类的图片
+    const images = document.getElementsByClassName("work__image");
+    
+    // 为每个图片添加点击事件
+    for(let i = 0; i < images.length; i++) {
+      images[i].onclick = function() {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+      }
+    }
+    
+    // 点击关闭按钮关闭模态框
+    closeBtn.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // 点击模态框外部关闭
+    modal.onclick = function(event) {
+      if(event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</body>
+
+</html>
