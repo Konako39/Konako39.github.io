@@ -1,12 +1,10 @@
-
-
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" type="image/png" href="./images/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="./images/icon.png" />
   <title>
     Home
   </title>
@@ -21,6 +19,13 @@
   <!-- ***** 页头 ***** -->
 
   <header class="header" role="banner" id="top">
+    <div class="fish-container">
+      <div id="lightEffect" class="light-effect">
+        <div class="light-core"></div>
+        <div class="light-halo"></div>
+        <div class="light-ray"></div>
+      </div>
+    </div>
     <div class="row">
       <nav class="nav" role="navigation">
         <ul class="nav__items">
@@ -41,7 +46,7 @@
         <h1 class="heading-primary">
           <span>宋立</span>
         </h1>
-        <p>遊びと新しさにときめいている</p>
+        <p>豊かな脳内世界では、ふとした瞬間にアイデアが芽生えます。コードと筆は、そんな混沌としながらも鮮やかに息づく想像を、現実へと結びつける架け橋です</p>
         <a href="#work" class="btn btn--pink">展示</a>
       </div>
     </div>
@@ -59,7 +64,7 @@
           <!-- 带有work__box类的每个div代表一个项目。可以复制这个结构来添加更多项目 -->
 
           <div class="work__box">
-            <div class="work__text">
+            <div class="work__text"  id="fubai">
               <h3>「腐敗」</h3>
               <p>
                 無限の輪廻の中で世界の真実を探し続ける．．．
@@ -87,7 +92,7 @@
           </div>
 
           <div class="work__box">
-            <div class="work__text">
+            <div class="work__text" id="yu">
               <h3>「あの魚を食べるまでは絶対に諦めない」</h3>
               <p>
                 上に行こう！いい匂いがする方へ
@@ -105,7 +110,7 @@
 
 
           <div class="work__box">
-            <div class="work__text">
+            <div class="work__text" id="lux">
               <h3>プロトタイプ：「Lux」</h3>
               <p>
                 クロスプラットフォーム対応のNPC通信。Discordで、ゲーム内にいるLuxに話しかけてみよう
@@ -125,7 +130,7 @@
           </div>
 
           <div class="work__box">
-            <div class="work__text">
+            <div class="work__text" id="blender">
               <h3>モデリング</h3>
               <p>
                 コンピュータとBlenderを使って、頭の中のイメージを形にする
@@ -146,7 +151,7 @@
 
 
           <div class="work__box">
-            <div class="work__text">
+            <div class="work__text" id="art">
               <h3>アート</h3>
               <p>
                 筆を使って色彩を遊ぶ
@@ -197,21 +202,20 @@
             <p>
               私はゲームを愛し、新しいものに心惹かれます。学び得たさまざまな技術をゲームに溶け込ませ、ひらめきを新たな形へと変えていきます。
               <br><br>
-              豊かな脳内の世界では、ふとした瞬間にアイデアが芽生えます。コードと筆は、そんな混沌とした、けれども鮮やかに息づく想像を現実へと結びつける架け橋です。
+              大規模言語モデル（LLM）に興味を持っており、LLMをゲームに組み込む可能性を探っています。単にゲーム内で会話を行うだけでなく、ゲームの楽しさそのものを高める方法を模索しています。
             </p>
             <div class="contact__info">
               <p>
                 Email:shoppesongli@gmail.com
               </p>
-              <!-- 用你的电子邮件替换下面的地址。这是访问者与你联系的主要方式 -->
-              <a href="shoppesongli@gmail.com" class="btn">お問い合わせ</a>
+              <!-- <a href="shoppesongli@gmail.com" class="btn">お問い合わせ</a> -->
             </div>
             <!-- <a href="#" class="btn">My Resume</a> -->
           </div>
           
           <div class="about__photo-container">
-            <!-- 添加你自己的专业照片。建议使用正方形或接近正方形的照片，尺寸至少为300x300像素 -->
-            <img class="about__photo" src="./images/syed-ali-hussnain.jpg" alt="" />
+            <!-- 自己的照片 -->
+            <img class="about__photo" src="./images/waitan.jpg" alt="" />
             
           </div>
         </div>
@@ -281,6 +285,142 @@
     <img src="./images/arrow-up.svg" alt="Back to Top" class="back-to-top__image"/>
   </a>
   <script src="./index.js"></script>
+  <script>
+    // 鼠标移动时控制光效特效
+    document.addEventListener('DOMContentLoaded', function() {
+      const lightEffect = document.getElementById('lightEffect');
+      const header = document.querySelector('.header');
+      const fishContainer = document.querySelector('.fish-container');
+      
+      // 记录光效的当前位置
+      let lightX = 50; // 初始水平位置（百分比）
+      let lightY = 30; // 初始垂直位置（百分比）
+      
+      // 记录目标位置
+      let targetX = 50;
+      let targetY = 30;
+      
+      // 光效移动速度(越小越慢)
+      const speed = 0.03;
+      
+      // 光效移动的范围限制（距离边缘的百分比）
+      const margin = 5;
+      
+      // 监听鼠标移动
+      document.addEventListener('mousemove', function(e) {
+        // 只有当鼠标在header区域才改变目标位置
+        const headerRect = header.getBoundingClientRect();
+        if (
+          e.clientX >= headerRect.left && 
+          e.clientX <= headerRect.right && 
+          e.clientY >= headerRect.top && 
+          e.clientY <= headerRect.bottom
+        ) {
+          // 计算鼠标在header中的相对位置（百分比）
+          targetX = ((e.clientX - headerRect.left) / headerRect.width) * 100;
+          targetY = ((e.clientY - headerRect.top) / headerRect.height) * 100;
+          
+          // 限制在安全范围内
+          targetX = Math.max(margin, Math.min(100 - margin, targetX));
+          targetY = Math.max(margin, Math.min(100 - margin, targetY));
+        }
+      });
+      
+      // 每帧更新光效的位置
+      function updateLightPosition() {
+        // 平滑移动光效 (LERP - 线性插值)
+        lightX += (targetX - lightX) * speed;
+        lightY += (targetY - lightY) * speed;
+        
+        // 更新光效的位置
+        lightEffect.style.left = `${lightX}%`;
+        lightEffect.style.top = `${lightY}%`;
+        
+        // 光效脉动动画
+        // 这里通过随机微调光效大小和亮度来模拟脉动感
+        const pulseIntensity = 0.9 + Math.random() * 0.2; // 0.9到1.1之间
+        const core = lightEffect.querySelector('.light-core');
+        const halo = lightEffect.querySelector('.light-halo');
+        
+        core.style.transform = `translate(-50%, -50%) scale(${pulseIntensity})`;
+        halo.style.opacity = 0.6 + (pulseIntensity - 0.9) * 0.5;
+        
+        // 继续下一帧
+        requestAnimationFrame(updateLightPosition);
+      }
+      
+      // 创建水泡效果
+      function createBubbles() {
+        // 创建水泡的数量
+        const bubbleCount = 15;
+        
+        // 清除现有的水泡
+        const existingBubbles = document.querySelectorAll('.bubble');
+        existingBubbles.forEach(bubble => bubble.remove());
+        
+        // 创建新的水泡
+        for (let i = 0; i < bubbleCount; i++) {
+          const bubble = document.createElement('div');
+          bubble.classList.add('bubble');
+          
+          // 随机生成水泡的大小
+          const size = Math.random() * 15 + 3; // 3px到18px之间
+          bubble.style.width = `${size}px`;
+          bubble.style.height = `${size}px`;
+          
+          // 随机生成水泡的水平位置
+          const left = Math.random() * 100;
+          bubble.style.left = `${left}%`;
+          
+          // 设置水泡的初始位置在底部
+          bubble.style.bottom = `0`;
+          
+          // 随机生成水泡的上升时间
+          const duration = Math.random() * 10 + 8; // 8s到18s之间
+          bubble.style.animationDuration = `${duration}s`;
+          
+          // 随机生成水泡的延迟时间
+          const delay = Math.random() * 5;
+          bubble.style.animationDelay = `${delay}s`;
+          
+          // 添加到容器中
+          fishContainer.appendChild(bubble);
+        }
+        
+        // 定时重新创建水泡
+        setTimeout(createBubbles, 15000); // 15秒后重新创建水泡
+      }
+      
+      // 开始动画和水泡效果
+      updateLightPosition();
+      createBubbles();
+      
+      // 随机出现的光线闪烁效果
+      setInterval(function() {
+        // 创建随机闪光
+        const flash = document.createElement('div');
+        flash.classList.add('light-flash');
+        
+        // 随机位置
+        const flashX = Math.random() * 100;
+        const flashY = Math.random() * 100;
+        flash.style.left = `${flashX}%`;
+        flash.style.top = `${flashY}%`;
+        
+        // 随机大小
+        const flashSize = Math.random() * 50 + 30;
+        flash.style.width = `${flashSize}px`;
+        flash.style.height = `${flashSize}px`;
+        
+        fishContainer.appendChild(flash);
+        
+        // 短暂显示后移除
+        setTimeout(() => {
+          flash.remove();
+        }, 800);
+      }, 1000); // 每2秒出现一次随机闪光
+    });
+  </script>
 </body>
 
 </html>
