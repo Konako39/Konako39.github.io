@@ -813,14 +813,40 @@ body:not(.user-is-tabbing) a:focus {
     margin-bottom: var(--gutter-normal);
 }
 
+.photo-with-caption {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.photo-caption {
+    text-align: center;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.5rem;
+    font-style: italic;
+    line-height: 1.4;
+}
+
 @media(min-width: 901px) {
     .about__text {
-        flex: 0 0 35%;
+        flex: 0 0 50%;
     }
     
     .about__photo-container {
         flex: 1;
-        margin: 0 var(--gutter-huge) 0 0;
+        margin: 0 var(--gutter-medium) 0 0;
+    }
+}
+
+.about__text p {
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media(max-width: 900px) {
+    .about__text p {
+        max-width: 100%;
     }
 }
 
@@ -872,3 +898,4 @@ body:not(.user-is-tabbing) a:focus {
         padding: var(--gutter-medium) 0;
     } 
 }
+
