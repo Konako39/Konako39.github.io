@@ -635,6 +635,7 @@ footer#contact { padding-bottom: 90px; }
   overflow: hidden;
 }
 .media-item img { width: 100%; }
+.media-item video { width: 100%; display: block; background: #000; }
 .media-item figcaption {
   font-size: 13px;
   color: var(--txt-dim);

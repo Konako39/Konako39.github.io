@@ -418,6 +418,13 @@
 
   function mediaBlock(p, m, idx) {
     const label = LPMedia(p, idx);
+    if (m.video) {
+      return `
+        <figure class="media-item">
+          <video src="${m.src}" poster="${m.poster || ""}" controls muted loop playsinline preload="none"></video>
+          <figcaption>▶ ${label}</figcaption>
+        </figure>`;
+    }
     if (m.heavy) {
       return `
         <figure class="media-item">
@@ -430,7 +437,7 @@
     }
     return `
       <figure class="media-item">
-        <img src="${m.src}" alt="${label}" loading="lazy">
+        <img src="${m.src}" alt="${label}" loading="lazy" decoding="async">
         <figcaption>${label}</figcaption>
       </figure>`;
   }
@@ -667,6 +674,10 @@
       achieve("patience");
     }
   });
+  // 视频播放（play 事件不冒泡，用捕获阶段全局监听）
+  document.addEventListener("play", (e) => {
+    if (e.target.tagName === "VIDEO") achieve("patience");
+  }, true);
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       closeModal();
