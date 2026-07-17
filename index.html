@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KONAKO ～被夺走的公主～</title>
+  <meta name="description" content="KONAKO —— 一个可以通关的个人主页：救出公主，收集金币，顺便认识一下作者。">
+  <link rel="icon" href="project/art/images/ICON.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 3D 流体油画背景 -->
+  <canvas id="fluid"></canvas>
+  <div class="canvas-grain"></div>
+
+  <!-- 标题画面 -->
+  <div id="start-screen">
+    <div class="start-inner">
+      <div class="lang-switch" id="lang-switch">
+        <button data-lang="zh">中文</button><button data-lang="en">EN</button><button data-lang="ja">日本語</button>
+      </div>
+      <div class="start-tag" data-i18n="startTag"></div>
+      <h1 class="start-title">KONAKO</h1>
+      <div class="start-story">
+        <div class="story-head" data-i18n="storyHead"></div>
+        <p data-i18n-html="story1"></p>
+        <p data-i18n-html="story2"></p>
+        <p class="story-dim" data-i18n-html="story3"></p>
+      </div>
+      <button id="btn-start" class="btn-start">
+        <span class="blink">▶</span> PRESS START
+      </button>
+      <div class="start-hint" data-i18n="startHint"></div>
+    </div>
+  </div>
+
+  <!-- 游戏 HUD -->
+  <header class="hud">
+    <div class="hud-left">
+      <img class="hud-avatar" id="hud-avatar" src="project/art/images/ICON.png" alt="Konako">
+      <div class="hud-stats">
+        <div class="hud-name">KONAKO <span class="hud-lv">Lv.<b id="hud-level">1</b></span></div>
+        <div class="bar hp"><div class="bar-fill" style="width:92%"></div><span>HP</span></div>
+        <div class="bar mp"><div class="bar-fill" style="width:78%"></div><span>MP</span></div>
+        <div class="bar exp" id="hud-exp"><div class="bar-fill" style="width:0%"></div><span>EXP</span></div>
+      </div>
+      <div class="hud-wallet">
+        <div class="hud-coin-ico"></div><b id="hud-coins">0</b>
+        <button class="hud-shop-btn" id="btn-shop-open" title="SHOP">🛒</button>
+        <div class="hud-keys" id="hud-keys"></div>
+      </div>
+    </div>
+    <nav class="hud-nav">
+      <a href="#stats" data-i18n="navStats"></a>
+      <a href="#main-quest" data-i18n="navMain"></a>
+      <a href="#side-quests" data-i18n="navSide"></a>
+      <a href="#boss-gate" data-i18n="navGate"></a>
+      <div class="lang-switch mini" id="lang-switch-hud">
+        <button data-lang="zh">中</button><button data-lang="en">EN</button><button data-lang="ja">日</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 任务日志 -->
+  <div id="quest-log" class="quest-log">
+    <button id="quest-toggle" class="quest-toggle" data-i18n="qlToggle"></button>
+    <div class="quest-panel">
+      <div class="quest-panel-title" data-i18n="qlMain"></div>
+      <div class="quest-keys-line"><span data-i18n="qlKeys"></span><span id="ql-keys">0 / 3</span></div>
+      <ul id="ql-mains"></ul>
+      <div class="quest-panel-title side-t" data-i18n="qlSide"></div>
+      <ul id="ql-sides"></ul>
+      <div class="quest-coin-line"><span data-i18n="qlCoins"></span><b id="ql-coins">0</b></div>
+      <button class="quest-panel-title ach-t" id="ql-ach-toggle"><span data-i18n="qlAchAll"></span> <span id="ql-ach">0</span><i class="ach-arrow">▾</i></button>
+      <ul id="ql-ach-list" class="ach-list"></ul>
+    </div>
+  </div>
+
+  <!-- 全屏特效层 -->
+  <div id="fx-flash"></div>
+
+  <main>
+    <!-- 主视觉 -->
+    <section id="hero">
+      <div class="hero-inner">
+        <div class="hero-kicker" data-i18n="heroKicker"></div>
+        <h2 class="hero-title" data-text="KONAKO">KONAKO</h2>
+        <p class="hero-line" data-i18n-html="heroLine"></p>
+        <p class="hero-sub" data-i18n="heroSub"></p>
+        <div class="hero-objective">
+          <span class="obj-tag" data-i18n="objTag"></span> <span data-i18n-html="objText"></span>
+        </div>
+        <br>
+        <a class="scroll-cue" href="#stats"><span>▼</span> <i data-i18n="scrollCue"></i></a>
+      </div>
+    </section>
+
+    <!-- 角色面板 -->
+    <section id="stats">
+      <h2 class="sec-title reveal"><span class="sec-en">STATUS</span><i data-i18n="secStatus"></i></h2>
+      <div id="stats-panel" class="stats-panel reveal">
+        <div class="stats-left">
+          <div class="stat-row"><label data-i18n="skill1"></label><div class="stat-bar"><div class="stat-fill f1" data-v="88"></div></div><b>88</b></div>
+          <div class="stat-row"><label data-i18n="skill2"></label><div class="stat-bar"><div class="stat-fill f2" data-v="85"></div></div><b>85</b></div>
+          <div class="stat-row"><label data-i18n="skill3"></label><div class="stat-bar"><div class="stat-fill f3" data-v="90"></div></div><b>90</b></div>
+          <div class="stat-row"><label data-i18n="skill4"></label><div class="stat-bar"><div class="stat-fill f4" data-v="78"></div></div><b>78</b></div>
+          <div class="stat-row"><label data-i18n="skill5"></label><div class="stat-bar"><div class="stat-fill f5" data-v="76"></div></div><b>76</b></div>
+        </div>
+        <div class="stats-right">
+          <div class="title-badge" data-i18n="statBadge"></div>
+          <p data-i18n="statP1"></p>
+          <p data-i18n="statP2"></p>
+          <div class="equip">
+            <span>🗡 Aseprite</span><span>🎨 Wacom</span><span>🧊 Blender</span><span>🤖 LLM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主线任务（重点介绍区） -->
+    <section id="main-quest" data-achieve="main">
+      <h2 class="sec-title reveal"><span class="sec-en">MAIN QUEST</span><i data-i18n="secMain"></i></h2>
+      <p class="sec-sub reveal" data-i18n="secMainSub"></p>
+      <div id="featured-host"></div>
+    </section>
+
+    <!-- 支线任务（普通区块） -->
+    <section id="side-quests" data-achieve="side">
+      <h2 class="sec-title reveal"><span class="sec-en">SIDE QUESTS</span><i data-i18n="secSide"></i></h2>
+      <p class="sec-sub reveal" data-i18n="secSideSub"></p>
+      <div id="side-host" class="side-grid"></div>
+    </section>
+
+    <!-- 魔王城 -->
+    <section id="boss-gate" data-achieve="gate">
+      <h2 class="sec-title reveal"><span class="sec-en">FINAL BOSS</span><i data-i18n="secGate"></i></h2>
+      <div class="gate-panel reveal">
+        <div class="gate-castle">🏰</div>
+        <div class="gate-desc" id="gate-desc"></div>
+        <div class="gate-slots" id="gate-slots"></div>
+        <button id="btn-gate" class="btn-start gate-btn" disabled></button>
+      </div>
+    </section>
+
+    <!-- 联络 -->
+    <footer id="contact">
+      <h2 class="sec-title reveal"><span class="sec-en">CONTACT</span><i data-i18n="secContact"></i></h2>
+      <div class="contact-panel reveal">
+        <p class="contact-line" data-i18n="contactLine"></p>
+        <div class="contact-links">
+          <a class="btn-primary" href="https://github.com/Konako39" target="_blank" rel="noopener">GitHub / Konako39</a>
+          <a class="btn-ghost" href="mailto:shoppesongli@gmail.com" data-i18n="contactMail"></a>
+        </div>
+        <p class="contact-foot"><span data-i18n="contactFoot"></span><br>
+        <a href="#" id="btn-reset" class="reset-link" data-i18n="resetLink"></a></p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- 项目详情弹窗 -->
+  <div id="modal"><div id="modal-panel"></div></div>
+
+  <!-- 商店 -->
+  <div id="shop">
+    <div id="shop-panel">
+      <button class="modal-close" id="shop-close" aria-label="close">✕</button>
+      <h3 class="shop-title" data-i18n="shopTitle"></h3>
+      <p class="shop-sub" data-i18n="shopSub"></p>
+      <div class="shop-wallet"><div class="hud-coin-ico"></div><b id="shop-coins">0</b></div>
+      <div id="shop-items" class="shop-grid"></div>
+    </div>
+  </div>
+
+  <!-- 公主的信 -->
+  <div id="letter">
+    <div class="letter-panel">
+      <h3 data-i18n="letterTitle"></h3>
+      <div class="letter-body" data-i18n-html="letterBody"></div>
+      <button class="btn-ghost" id="letter-close" data-i18n="close"></button>
+    </div>
+  </div>
+
+  <!-- 结局画面 -->
+  <div id="ending">
+    <div class="ending-inner">
+      <div id="ending-lines"></div>
+      <div class="ending-stats" id="ending-stats"></div>
+      <div class="ending-actions" id="ending-actions"></div>
+    </div>
+  </div>
+
+  <!-- 成就弹窗堆栈 -->
+  <div id="toast-stack"></div>
+
+  <script src="js/projects.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/fluid.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
