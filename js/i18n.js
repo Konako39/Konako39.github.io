@@ -47,6 +47,7 @@ const I18N = {
       qlMain: "⚔ 主线 · 拯救公主", qlSide: "🗺 支线 · 世界探索",
       qlKeys: "钥匙：", qlCoins: "💰 金币：", qlAch: "🏆 成就：",
       qlAchAll: "🏆 成就大全", achLocked: "？？？未解锁",
+      backToMap: "返回地图", nextFile: "下一份档案", zoomHint: "点击图片放大查看",
       bossTag: "★ BOSS 档案", sideTag: "SIDE QUEST",
       keyTagHas: "🔑 深处藏着一把钥匙", keyTagDone: "🔑 钥匙已到手",
       openFile: "▶ 打开任务档案", reopenFile: "✔ 重读档案",
@@ -160,6 +161,7 @@ const I18N = {
       qlMain: "⚔ Main · Save the Princess", qlSide: "🗺 Side · World Exploration",
       qlKeys: "Keys: ", qlCoins: "💰 Coins: ", qlAch: "🏆 Achievements: ",
       qlAchAll: "🏆 Achievement List", achLocked: "??? Locked",
+      backToMap: "Back to map", nextFile: "Next file", zoomHint: "Click image to zoom",
       bossTag: "★ BOSS FILE", sideTag: "SIDE QUEST",
       keyTagHas: "🔑 A key lies deep inside", keyTagDone: "🔑 Key obtained",
       openFile: "▶ Open quest file", reopenFile: "✔ Re-read file",
@@ -239,7 +241,17 @@ const I18N = {
           "A dark-fairytale side-scrolling pixel action game. You play a samurai who has lost his heart, wandering rain-soaked giant forests and gloomy dungeons, slaying mushroom fiends in search of what he lost.",
           "A complete action system: multi-hit combos, skills, status effects (burn / poison / stun), enemy AI behavior trees, and cinematic boss fights with story dialogue.",
         ],
-        mediaLabels: ["Boss Fight · Lost-Heart Samurai", "Dungeon story scene", "Exploration", "Samurai combo demo", "Skill system", "Status effect system", "Enemy AI", "Gameplay demo"],
+        mediaLabels: ["Boss Fight · Lost-Heart Samurai", "Dungeon story scene", "Exploration", "Samurai combo demo", "Skill system", "Status effect system", "Enemy AI", "Gameplay flow"],
+        mediaTexts: [
+          "One of the game's core set-pieces: a boss fight in the rain-soaked forest. HP / MP / stamina bars and the boss health bar form a complete combat HUD, with rain, light shafts and fireflies all driven by particles and lighting. The boss gets its own entrance cutscene.",
+          "A story beat by the dungeon campfire: a mysterious traveler points the way. Dialogue box, pixel font and scene lighting are all hand-made — warm firelight breathing against the dark dungeon.",
+          "Scene design for exploration: lighting and fog build depth, with switches, hidden passages and secret items rewarding players who wander.",
+          "Multi-hit combos in action: light and heavy attacks chain freely, each with its own wind-up, hit feedback and hit-stop tuning — game feel is where most of the polish went.",
+          "The full skill loop — cast, cooldown, resource cost — paired with frame-by-frame impact VFX. Skills can cancel combo chains, forming your own move list.",
+          "Status effects — burn, poison, stun — stacking and resolving: icons, particles and damage numbers all linked, sharing one state machine for players and enemies alike.",
+          "Enemy AI behavior trees: detection, chase, attack and retreat transitions, with distinct aggro ranges and aggression per enemy type.",
+          "A complete gameplay slice: exploration into combat into cutscene, showing the game's overall rhythm.",
+        ],
       },
       steam_exit: {
         title: "The Exit on Floor 10", type: "3D Paranormal Anomaly Escape · ON STEAM",
@@ -251,6 +263,13 @@ const I18N = {
           "Judge correctly to ascend; guess wrong and you fall back to the start — while dodging the paranormal threats lurking on each floor. Reach the final EXIT and find the true ending! Now on Steam — wishlist it!",
         ],
         mediaLabels: ["A perfectly normal office floor", "Spot the anomaly", "Something's off on every floor", "...it's right there", "Reach the EXIT, or fall back?"],
+        mediaTexts: [
+          "It all starts in this utterly ordinary office. Memorize every desk, every plant — next time the elevator opens, they might not be the same.",
+          "Up to 31 anomalies are hidden in the game: shifted furniture, changed lights, things that simply shouldn't exist. Observation is your survival skill.",
+          "Lighting, textures and sound can all be clues — or red herrings. UE's dynamic lighting keeps every floor's 'wrongness' hidden just right.",
+          "The red room. Some anomalies aren't content to be 'spotted' — they come looking for you. When that happens: run.",
+          "Judge right and ascend; judge wrong and fall back to the start. Survive ten floors to reach the EXIT and the true ending.",
+        ],
       },
       steam_civ: {
         title: "Digital Civilization: Evolution", type: "Civilization Sim / Strategy · ON STEAM",
@@ -261,6 +280,13 @@ const I18N = {
           "A deep numbers-driven simulation: job assignment, build queues, tech trees, random events and diplomacy — every decision rewrites your civilization's fate. Now on Steam!",
         ],
         mediaLabels: ["Colony construction", "Tech tree · primitive to future", "Resources & jobs", "Event log · your civilization's story", "Dawn of an empire"],
+        mediaTexts: [
+          "The colony construction panel: build queues and timelines for housing, production and military buildings. Labor is the foundation — with spare housing, people start families and welcome new life.",
+          "A layered tech tree spanning the whole history of civilization: every technology genuinely changes production, population and social parameters rather than being a flat unlock. Research direction shapes what your civilization becomes.",
+          "Warehouse and workforce systems: production chains for food, wood and stone, and job allocation across hunters, loggers and builders — every adjustment ripples through the economy.",
+          "The event log records your civilization's every day: births and deaths, constructions and glories, the traveler you turned away, the tribesman taken by beasts... your civilization's story writes itself.",
+          "When the tribe becomes an empire, look back at the log — behind every number is a decision you made. A native web simulation game built entirely with Vue.",
+        ],
       },
       project2: {
         title: "Witch Cat Climb", type: "Casual Jumper · Portrait",
@@ -271,6 +297,13 @@ const I18N = {
           "An art experiment mixing watercolor backgrounds with pixel characters: soft city colors against a crisp pixel cat, a contrast both striking and adorable.",
         ],
         mediaLabels: ["Above the clouds", "Gameplay · climbing", "Level design", "Player controls demo", "NPC interaction"],
+        mediaTexts: [
+          "The higher you fly, the more the scenery changes — breaking through the sea of clouds is the emotional peak of the game.",
+          "Watercolor European buildings + a pixel black cat: current and best heights at the top, the magic button at the bottom. Soft versus sharp is the whole art thesis of this game.",
+          "Level design sheets: platform rhythm, item placement and the difficulty curve — the higher you go, the tighter the landings and the more magic matters.",
+          "Jump feel and spellcasting in action: short tap for a hop, long press for a leap, plus one mid-air magic save.",
+          "The NPCs along the way: some bring surprises, some just get in the way — they make every climb a little different.",
+        ],
       },
       project3: {
         title: "Lux · AI Companion", type: "AI / Discord Bot",
@@ -281,6 +314,12 @@ const I18N = {
           "The same Lux is also wired into an in-game dialogue UI: the friend you met on Discord can meet you again inside a game world. Covers long-term memory management, persona prompt engineering and a cross-platform dialogue pipeline — with a published arXiv paper.",
         ],
         mediaLabels: ["Discord × in-game dialogue", "Long-term memory demo", "System flowchart", "Lux character art"],
+        mediaTexts: [
+          "One Lux, two worlds: the in-game dialogue UI on the left, the Discord chat log on the right — one shared memory and personality across platforms.",
+          "Long-term memory in practice: greet her a day later and Lux still knows who you are and what you talked about — retrieval and writing are fully transparent to the user.",
+          "The system pipeline: message → memory retrieval → persona prompt assembly → LLM inference → dual-platform output. The memory work behind this became an arXiv paper.",
+          "Lux's character design: blue hair, a sailor uniform, and just a little shyness — 'Wait, are we... really meeting?'",
+        ],
       },
       art: {
         title: "Art Gallery", type: "Illustration / Concept Art",
@@ -292,6 +331,18 @@ const I18N = {
           "Also includes character and fan art — witches, heroes, and some strange but lovable creatures.",
         ],
         mediaLabels: ["Maple Lake", "Castle in Fog", "Iceberg", "The City", "Blade Aura", "Flame Study", "Witch", "Hero", "Loser", "Link · fan art"],
+        mediaTexts: [
+          "The one where autumn is set on fire: orange-red floods the frame, leaving only the rower's cool blue as a breathing space. Impasto strokes and backlit trunks carry the rhythm.",
+          "An atmospheric perspective study in grey: fog pushes the castle away, a few highlights pull the eye back.",
+          "A light study in the cold range: ice translucency, sunken sea colors, layers found inside blue.",
+          "City silhouettes at dusk color temperature — the moment light leaks between buildings.",
+          "A motion study: brush direction and speed lines carrying the energy of a single slash.",
+          "Deconstructing fire: from the twist of flame tongues to scattering sparks — a pure element study.",
+          "Character design: a witch and her color story.",
+          "A hero study — which incidentally became the origin of this website's whole story.",
+          "A small-feelings doodle. Felt better after painting it.",
+          "Wind of Hyrule: a fan tribute to one of my favorite games ever.",
+        ],
       },
       blender: {
         title: "3D Workshop", type: "3D Modeling / Rendering",
@@ -302,6 +353,17 @@ const I18N = {
           "And experiments in making them move — turntable animations and VR scene tests.",
         ],
         mediaLabels: ["Miku · Lolita figure", "BA fan render", "Cake still-life", "Cola", "Winding Stream", "Cabin scene", "Small scene", "Miku turntable animation", "VR scene experiment"],
+        mediaTexts: [
+          "The workshop's signature piece: cloth frills modeled layer by layer, tackling the pannier structure and lace-edge detail — the 'three extra layers of frills' obsession started here.",
+          "Blue Archive fan render: a likeness study focused on hair segment modeling and toon-shading outline control.",
+          "Dessert still-life: subsurface scattering in the cream, highlights on the fruit — material studies that make you hungry.",
+          "A refraction ensemble of liquid, glass and ice — a Cycles caustics exercise.",
+          "An eastern miniature: winding-stream water material and garden staging.",
+          "Natural lighting practice: morning light through a cabin window.",
+          "A slice-of-life micro scene — the lived-in feel comes from stacked details.",
+          "A 360° turntable: the skirt's layered structure revealed in rotation.",
+          "An experiment in making scenes walkable in VR — next step: putting the figures inside.",
+        ],
       },
     },
   },
@@ -347,6 +409,7 @@ const I18N = {
       qlMain: "⚔ メイン · 姫の救出", qlSide: "🗺 サイド · 世界探索",
       qlKeys: "鍵：", qlCoins: "💰 コイン：", qlAch: "🏆 実績：",
       qlAchAll: "🏆 実績一覧", achLocked: "？？？未解除",
+      backToMap: "マップへ戻る", nextFile: "次のファイル", zoomHint: "クリックで拡大表示",
       bossTag: "★ BOSSファイル", sideTag: "SIDE QUEST",
       keyTagHas: "🔑 奥に鍵が眠っている", keyTagDone: "🔑 鍵を入手済み",
       openFile: "▶ ファイルを開く", reopenFile: "✔ もう一度読む",
@@ -427,6 +490,16 @@ const I18N = {
           "完全なアクションシステムを搭載：多段コンボ、スキル、状態異常（火傷／毒／スタン）、敵AIビヘイビアツリー、演出たっぷりのボス戦とストーリー会話。",
         ],
         mediaLabels: ["ボス戦 · 失心武士", "ダンジョンのストーリー演出", "フィールド探索", "武士コンボデモ", "スキルシステム", "状態異常システム", "敵AI", "実機プレイ"],
+        mediaTexts: [
+          "ゲームの目玉のひとつ、雨の森でのボス戦。HP／MP／スタミナとボスの体力バーで戦闘HUDを構成し、雨粒・光の筋・蛍はすべてパーティクルとライティングで駆動。ボスには専用の登場演出も。",
+          "ダンジョンの焚き火のそばで語られる物語。謎の旅人が道を示す——ダイアログ、ドットフォント、光の演出まですべて自作。焚き火の暖かさと闇のコントラストが呼吸を生む。",
+          "探索パートのシーンデザイン：光と霧で奥行きを作り、仕掛け・隠し通路・秘密のアイテムが、寄り道するプレイヤーに報いる。",
+          "多段コンボの実機映像：弱攻撃と強攻撃が自由につながり、各段に固有の予備動作・ヒット反応・ヒットストップを調整。手触りこそ一番磨いた部分。",
+          "スキルの発動・クールダウン・リソース消費のループと、コマ打ちのヒットエフェクト。スキルでコンボをキャンセルして自分だけの連携が作れる。",
+          "火傷・毒・スタンなど状態異常の重ねがけと精算：アイコン、パーティクル、ダメージ表記が連動し、敵味方で同じステートマシンを共有。",
+          "敵AIビヘイビアツリーのデモ：索敵・追跡・攻撃・撤退の状態遷移。敵ごとに警戒範囲と攻撃性が異なる。",
+          "探索から戦闘、そして演出へ——ゲーム全体のリズムを見せるひと続きの実機プレイ。",
+        ],
       },
       steam_exit: {
         title: "10階の非常口", type: "3D 心霊異変脱出 · STEAM配信中",
@@ -438,6 +511,13 @@ const I18N = {
           "正しく判断すれば上の階へ、見誤れば振り出しへ。潜む心霊の脅威をかわし、最後の『EXIT』へ——真のエンディングを見つけよう！Steamで配信中、ウィッシュリスト登録をぜひ！",
         ],
         mediaLabels: ["ごく普通のオフィスフロア", "異変を探せ", "どのフロアも何かがおかしい", "……そこにいる", "EXITへ、それとも振り出しへ？"],
+        mediaTexts: [
+          "すべてはこのごく普通のオフィスから始まる。机も観葉植物も全部覚えておくこと——次にエレベーターが開いたとき、同じとは限らない。",
+          "ゲームには最大31種の異変が潜む：家具のズレ、照明の変化、存在してはいけない何か。観察力こそが生存スキル。",
+          "光も、テクスチャも、音さえも手がかりであり、罠でもある。UEの動的ライティングが各フロアの『違和感』を絶妙に隠す。",
+          "赤い部屋。『見つけられる』ことに満足しない異変もいる——向こうから会いに来るのだ。遭遇したら、走れ。",
+          "正解なら上の階へ、間違えれば振り出しへ。10階の試練を越えて『EXIT』にたどり着いた者だけが、真のエンディングを見る。",
+        ],
       },
       steam_civ: {
         title: "デジタル文明：進化", type: "文明シミュレーション / ストラテジー · STEAM配信中",
@@ -448,6 +528,13 @@ const I18N = {
           "数値駆動の本格シミュレーション：職業配分、建設キュー、技術ツリー、ランダムイベントに他国との外交——あらゆる決断が文明の行方を書き換える。Steamで配信中！",
         ],
         mediaLabels: ["建設 · コロニー", "技術ツリー · 原始から未来へ", "資源と職業の管理", "イベントログ · 文明の物語", "帝国の夜明け"],
+        mediaTexts: [
+          "コロニー建設パネル：住居・生産・軍事施設の建設キューと工期管理。労働力こそすべての基盤——住居に余裕があれば、人々は家庭を築き新しい命を迎える。",
+          "文明史を貫く階層型技術ツリー。各技術は生産・人口・社会パラメータを実際に変化させる、ただのアンロックではない。研究方針が文明のかたちを決める。",
+          "資源倉庫と職業人口システム：食料・木材・石材の生産チェーンと、狩人・木こり・建築工の配置。ひとつの調整が経済全体に波及する。",
+          "イベントログは文明の毎日を記録する：誕生と死、建設と栄光、断った旅人、獣にさらわれた仲間……数字の裏で物語が自動的に紡がれる。",
+          "部落が帝国になったとき、ログを振り返れば、どの数字の裏にもあなたの決断がある。Vueだけで作られたブラウザネイティブのシミュレーションゲーム。",
+        ],
       },
       project2: {
         title: "魔女ネコ・塔のぼり", type: "カジュアルジャンプ · 縦画面",
@@ -458,6 +545,13 @@ const I18N = {
           "「水彩背景 × ドット絵キャラ」のミックス実験作。やわらかい街の色彩とパキッとしたドットのネコが、強烈でかわいいコントラストに。",
         ],
         mediaLabels: ["雲の上", "実機画面 · 塔のぼり", "レベルデザイン", "プレイヤー操作デモ", "NPCとの交流"],
+        mediaTexts: [
+          "高く飛ぶほど景色が変わる——雲海を突き抜ける瞬間が、このゲームの感情のピーク。",
+          "水彩タッチのヨーロッパ風ビル群 × ドットの黒ネコ。上部に現在高度と最高記録、下部に魔法ボタン。柔らかさと鋭さの対比がこのゲームの美術テーマ。",
+          "レベルデザイン資料：足場のリズム、アイテム配置、難易度曲線——上に行くほど着地はシビアに、魔法は重要に。",
+          "ジャンプの手触りと魔法発動の実機デモ：短押しで小ジャンプ、長押しで大ジャンプ、空中には一度だけ魔法の救済がある。",
+          "道中のNPCたち：驚きをくれる者も、ただ邪魔する者も——おかげで毎回の塔のぼりが少しずつ違う。",
+        ],
       },
       project3: {
         title: "Lux · AIパートナー", type: "AI / Discord Bot",
@@ -468,6 +562,12 @@ const I18N = {
           "同じLuxはゲーム内会話UIにも接続済み。Discordで出会った彼女と、ゲームの世界でもう一度会える。長期記憶管理、ペルソナプロンプト設計、クロスプラットフォーム対話パイプラインを網羅し、arXiv論文も公開。",
         ],
         mediaLabels: ["Discord × ゲーム内会話", "長期記憶のデモ", "システムフロー図", "Lux 立ち絵"],
+        mediaTexts: [
+          "同じLux、ふたつの世界：左はゲーム内の会話UI、右はDiscordのチャットログ。プラットフォームをまたいで同じ記憶と人格を共有する。",
+          "長期記憶の実測：一日経って挨拶しても、Luxはあなたが誰で、何を話したかを覚えている——記憶の検索と書き込みはユーザーに完全に透明。",
+          "システムパイプライン：メッセージ → 記憶検索 → ペルソナプロンプト組み立て → LLM推論 → 両プラットフォームへ出力。この記憶まわりの研究がarXiv論文になった。",
+          "Luxのキャラクター設定：青い髪、セーラー服、そして少しの照れ——「え、本当に会えているんですか…？」",
+        ],
       },
       art: {
         title: "アートギャラリー", type: "イラスト / コンセプトアート",
@@ -479,6 +579,18 @@ const I18N = {
           "キャラクターやファンアートも——魔女、勇者、そしてちょっと変だけど愛おしいやつら。",
         ],
         mediaLabels: ["紅葉の湖", "霧の城", "氷山", "都市", "刀気", "炎の習作", "魔女", "勇者", "Loser", "リンク · ファンアート"],
+        mediaTexts: [
+          "秋をまるごと燃やした一枚：画面をオレンジで埋め尽くし、舟人の寒色だけを呼吸口として残す。厚塗りのストロークと逆光の幹のリズムが主役。",
+          "グレートーンの空気遠近法の習作：霧が城を遠ざけ、数カ所のハイライトが視線を引き戻す。",
+          "寒色域の光の構造練習：氷の透過光、海の沈んだ色、青の中の階調探し。",
+          "黄昏の色温度に沈む街のシルエット。ビルの隙間から光が漏れる瞬間。",
+          "動勢の練習：筆致の方向とスピード線で、一太刀のエネルギーを描く。",
+          "炎のかたちの分解：うねる火舌から飛び散る火の粉まで、純粋なエレメント習作。",
+          "キャラクターデザイン：魔女と彼女の配色の物語。",
+          "勇者の習作——のちにこのサイトの世界観の原点になった一枚。",
+          "ちょっとした感情の落書き。描いたらスッキリした。",
+          "ハイラルの風：大好きなゲームへのファンアート・トリビュート。",
+        ],
       },
       blender: {
         title: "3D工房", type: "3Dモデリング / レンダリング",
@@ -489,6 +601,17 @@ const I18N = {
           "動かす実験も——ターンテーブルアニメーションやVRシーンのテスト。",
         ],
         mediaLabels: ["Miku · ロリータフィギュア", "BA ファンレンダー", "ケーキ静物", "コーラ", "曲水の宴", "木の小屋", "小さなシーン", "Miku ターンテーブル", "VRシーン実験"],
+        mediaTexts: [
+          "工房の看板作品：布のフリルを一層ずつモデリングし、パニエ構造とレースの縁の細部に挑んだ——『スカートにフリル三段追加』のこだわりはここから始まった。",
+          "ブルアカのファンレンダー：髪の房分けモデリングとトゥーンシェーディングの輪郭線コントロールの練習。",
+          "スイーツ静物：クリームのサブサーフェス散乱、フルーツのハイライト——お腹が空くマテリアル研究。",
+          "液体・ガラス・氷の屈折の合奏。Cyclesのコースティクス練習。",
+          "東洋の小さな庭：曲水の水面マテリアルと庭園の舞台づくり。",
+          "自然光のライティング練習：小屋の窓から差し込む朝の光。",
+          "日常の小さなシーン練習——生活感はディテールの積み重ねから。",
+          "360°ターンテーブル：回転の中でスカートの層構造がすべて見える。",
+          "シーンをVR空間として歩けるようにする実験——次はフィギュアたちを中に置きたい。",
+        ],
       },
     },
   },
@@ -525,4 +648,9 @@ function LPMedia(p, idx) {
   const ov = I18N[LANG].projects && I18N[LANG].projects[p.id];
   if (ov && ov.mediaLabels && ov.mediaLabels[idx] != null) return ov.mediaLabels[idx];
   return p.media[idx].label;
+}
+function LPMediaText(p, idx) {
+  const ov = I18N[LANG].projects && I18N[LANG].projects[p.id];
+  if (ov && ov.mediaTexts && ov.mediaTexts[idx] != null) return ov.mediaTexts[idx];
+  return p.media[idx].text || "";
 }

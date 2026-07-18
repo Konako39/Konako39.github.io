@@ -408,77 +408,138 @@
     renderQuestLog();
     renderGate();
     renderHUD();
+    // 舞台页里完成任务 → 原地刷新完成区
+    if (stageId === id) {
+      const zone = $("#stage-complete");
+      if (zone) zone.innerHTML = completeZone(p);
+    }
     if (window.FluidFX.ready) window.FluidFX.burst(isMain ? 10 : 5);
     if (isMain) { screenFlash(); screenShake(); }
   }
 
-  /* ================= 详情弹窗 ================= */
-  const modal = $("#modal");
-  const modalPanel = $("#modal-panel");
+  /* ================= 项目档案 · 全屏舞台页 ================= */
+  const stage = $("#stage");
+  let stageId = null;          // 当前打开的项目
+  let stageGallery = [];       // 当前舞台的可放大图片列表
 
-  function mediaBlock(p, m, idx) {
-    const label = LPMedia(p, idx);
-    if (m.video) {
-      return `
-        <figure class="media-item">
-          <video src="${m.src}" poster="${m.poster || ""}" controls muted loop playsinline preload="none"></video>
-          <figcaption>▶ ${label}</figcaption>
-        </figure>`;
-    }
-    if (m.heavy) {
-      return `
-        <figure class="media-item">
-          <button class="gif-loader" data-src="${m.src}">
-            <span class="gif-play">▶</span>
-            <span>${T("gifLoad")}<em>${T("gifWait", { size: m.size })}</em></span>
-          </button>
-          <figcaption>${label}</figcaption>
-        </figure>`;
-    }
-    return `
-      <figure class="media-item">
-        <img src="${m.src}" alt="${label}" loading="lazy" decoding="async">
-        <figcaption>${label}</figcaption>
-      </figure>`;
+  function completeZone(p) {
+    const done = !!save.quests[p.id];
+    return done
+      ? '<div class="quest-done-mark">' + T("doneMark") + (p.featured ? T("doneMarkKey") : "") + "</div>"
+      : '<button class="btn-primary quest-complete" data-complete="' + p.id + '">' +
+        (p.featured ? T("completeMain") : T("completeSide")) + "</button>";
   }
 
-  function openModal(id) {
-    const p = PROJECTS.find((x) => x.id === id);
-    if (!p) return;
-    const done = !!save.quests[id];
-    const isMain = p.featured;
-    modalPanel.innerHTML = `
-      <button class="modal-close" aria-label="close">✕</button>
-      <div class="modal-head">
-        <img class="modal-icon" src="${p.icon}" alt="">
-        <div>
-          <div class="quest-line">${isMain ? "MAIN QUEST" : "SIDE QUEST"} · ${T("modalFile")}</div>
-          <h3 class="modal-title">${LP(p, "title")} <span class="featured-sub">${p.subtitle}</span></h3>
-          <div class="type-line">${LP(p, "type")}</div>
+  function stageMediaRow(p, m, idx) {
+    const label = LPMedia(p, idx);
+    const text = LPMediaText(p, idx);
+    const media = m.video
+      ? `<video src="${m.src}" poster="${m.poster || ""}" controls muted loop playsinline preload="none"></video>`
+      : `<img src="${m.src}" alt="${label}" loading="lazy" decoding="async" data-zoom="${idx}">`;
+    return `
+      <div class="st-row ${idx % 2 ? "rev" : ""}">
+        <figure class="st-media">${media}</figure>
+        <div class="st-txt">
+          <div class="st-num">${String(idx + 1).padStart(2, "0")}</div>
+          <h3>${m.video ? "▶ " : ""}${label}</h3>
+          <p>${text || ""}</p>
+          ${m.video ? "" : '<div class="st-zoom-hint">🔍 ' + T("zoomHint") + "</div>"}
         </div>
-      </div>
-      <div class="chips">${tagChips(LP(p, "tags") || p.tags)}</div>
-      ${techRow(p)}
-      ${LP(p, "desc").map((d) => `<p class="modal-desc">${d}</p>`).join("")}
-      <div class="card-actions">${steamBtn(p, "btn-primary")}${paperBtn(p)}</div>
-      <div class="media-grid">${p.media.map((m, i) => mediaBlock(p, m, i)).join("")}</div>
-      <div class="quest-complete-zone">
-        ${done
-          ? '<div class="quest-done-mark">' + T("doneMark") + (isMain ? T("doneMarkKey") : "") + "</div>"
-          : '<button class="btn-primary quest-complete" data-complete="' + id + '">' +
-            (isMain ? T("completeMain") : T("completeSide")) + "</button>"}
       </div>`;
-    modal.classList.add("open");
+  }
+
+  function nextProject(id) {
+    const i = PROJECTS.findIndex((x) => x.id === id);
+    return PROJECTS[(i + 1) % PROJECTS.length];
+  }
+
+  function renderStage(id) {
+    const p = PROJECTS.find((x) => x.id === id);
+    if (!p) return false;
+    stageId = id;
+    stageGallery = p.media.map((m, i) => ({ m, i })).filter((x) => !x.m.video);
+    const np = nextProject(id);
+    stage.innerHTML = `
+      <div class="stage-scroll" style="--acc:${p.accent || "#ffb300"}">
+        <button class="stage-back">← ${T("backToMap")}</button>
+        <header class="st-hero">
+          <img class="st-hero-bg" src="${p.thumb}" alt="">
+          <div class="st-hero-grad"></div>
+          <div class="st-hero-inner">
+            <div class="quest-line">${p.featured ? "MAIN QUEST" : "SIDE QUEST"} · ${T("modalFile")}</div>
+            <h1 class="st-title">${LP(p, "title")}</h1>
+            <div class="st-sub">${p.subtitle}</div>
+            <div class="type-line">${LP(p, "type")}</div>
+            <div class="chips">${tagChips(LP(p, "tags") || p.tags)}</div>
+            ${techRow(p)}
+            <div class="card-actions">${steamBtn(p, "btn-primary")}${paperBtn(p)}</div>
+          </div>
+        </header>
+        <section class="st-intro">
+          ${LP(p, "desc").map((d) => `<p>${d}</p>`).join("")}
+        </section>
+        <section class="st-showcase">${p.media.map((m, i) => stageMediaRow(p, m, i)).join("")}</section>
+        <footer class="st-foot">
+          <div class="quest-complete-zone" id="stage-complete">${completeZone(p)}</div>
+          <div class="st-foot-nav">
+            <button class="btn-ghost stage-back">← ${T("backToMap")}</button>
+            <button class="btn-ghost st-next" data-stage-open="${np.id}">${T("nextFile")}：${LP(np, "title")} →</button>
+          </div>
+        </footer>
+      </div>`;
+    stage.classList.add("open");
+    stage.scrollTop = 0;
     document.body.style.overflow = "hidden";
-    armVibeBars(modalPanel);
+    armVibeBars(stage);
     achieve("intel");
     if (window.FluidFX.ready) window.FluidFX.burst(4);
+    return true;
   }
 
-  function closeModal() {
-    modal.classList.remove("open");
-    document.body.style.overflow = "";
+  function openStage(id) {
+    if (!renderStage(id)) return;
+    if (location.hash !== "#p/" + id) {
+      history.pushState(null, "", "#p/" + id);
+    }
   }
+
+  function closeStage(skipHistory) {
+    stage.classList.remove("open");
+    stage.innerHTML = "";
+    stageId = null;
+    document.body.style.overflow = "";
+    if (!skipHistory && location.hash.startsWith("#p/")) {
+      history.pushState(null, "", location.pathname + location.search);
+    }
+  }
+
+  // 浏览器前进/后退 与 hash 深链接
+  function syncFromHash() {
+    const mHash = location.hash.match(/^#p\/(.+)$/);
+    if (mHash && PROJECTS.some((p) => p.id === mHash[1])) {
+      renderStage(mHash[1]);
+    } else if (stageId) {
+      closeStage(true);
+    }
+  }
+  window.addEventListener("popstate", syncFromHash);
+
+  /* ================= 图片灯箱 ================= */
+  const lightbox = $("#lightbox");
+  let lbIndex = 0;
+
+  function openLightbox(gi) {
+    if (!stageGallery.length) return;
+    lbIndex = ((gi % stageGallery.length) + stageGallery.length) % stageGallery.length;
+    const p = PROJECTS.find((x) => x.id === stageId);
+    const item = stageGallery[lbIndex];
+    $("#lb-img").src = item.m.src;
+    $("#lb-caption").textContent =
+      (lbIndex + 1) + " / " + stageGallery.length + " · " + LPMedia(p, item.i);
+    lightbox.classList.add("open");
+  }
+  function stepLightbox(d) { openLightbox(lbIndex + d); }
+  function closeLightbox() { lightbox.classList.remove("open"); $("#lb-img").src = ""; }
 
   /* ================= 商店 ================= */
   const SHOP_ITEMS = [
@@ -642,16 +703,27 @@
     const goto = e.target.closest("[data-goto]");
     if (goto) { gotoCard(goto.dataset.goto); return; }
     const opener = e.target.closest("[data-open]");
-    if (opener) { openModal(opener.dataset.open); return; }
+    if (opener) { openStage(opener.dataset.open); return; }
+    const stOpener = e.target.closest("[data-stage-open]");
+    if (stOpener) { openStage(stOpener.dataset.stageOpen); return; }
     const completer = e.target.closest("[data-complete]");
-    if (completer) { completeQuest(completer.dataset.complete, e); closeModal(); return; }
+    if (completer) { completeQuest(completer.dataset.complete, e); return; }
+    const zoomImg = e.target.closest("[data-zoom]");
+    if (zoomImg) {
+      const idx = +zoomImg.dataset.zoom;
+      const gi = stageGallery.findIndex((x) => x.i === idx);
+      if (gi >= 0) openLightbox(gi);
+      return;
+    }
+    if (e.target.closest(".lb-prev")) { stepLightbox(-1); return; }
+    if (e.target.closest(".lb-next")) { stepLightbox(1); return; }
+    if (e.target.closest(".lb-close") || e.target === lightbox) { closeLightbox(); return; }
+    if (e.target.closest(".stage-back")) { closeStage(); return; }
     const shopBuy = e.target.closest(".shop-buy");
     if (shopBuy) { shopAction(shopBuy.dataset.item, e); return; }
     if (e.target.closest("#btn-shop-open")) { renderShop(); $("#shop").classList.add("open"); return; }
     if (e.target.closest("#shop-close") || e.target === $("#shop")) { $("#shop").classList.remove("open"); return; }
     if (e.target.closest("#letter-close") || e.target === $("#letter")) { $("#letter").classList.remove("open"); return; }
-    if (e.target.closest(".modal-close")) { closeModal(); return; }
-    if (e.target === modal) { closeModal(); return; }
     if (e.target.closest("#btn-gate") && !$("#btn-gate").disabled) { playEnding(); return; }
     if (e.target.closest("#btn-again")) {
       try { localStorage.removeItem(SAVE_KEY); } catch (err) {}
@@ -680,9 +752,18 @@
   }, true);
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      closeModal();
-      $("#shop").classList.remove("open");
-      $("#letter").classList.remove("open");
+      if (lightbox.classList.contains("open")) { closeLightbox(); return; }
+      if ($("#shop").classList.contains("open") || $("#letter").classList.contains("open")) {
+        $("#shop").classList.remove("open");
+        $("#letter").classList.remove("open");
+        return;
+      }
+      if (stageId) closeStage();
+    }
+    // 灯箱左右键切换
+    if (lightbox.classList.contains("open")) {
+      if (e.key === "ArrowLeft") stepLightbox(-1);
+      if (e.key === "ArrowRight") stepLightbox(1);
     }
   });
 
@@ -767,6 +848,7 @@
   syncCoins();
   renderHUD();
   applyToggles();
+  syncFromHash();   // 支持 #p/项目id 深链接直达档案页
   // fluid.js 可能晚于本脚本就绪，笔刷设置再补一次
   setTimeout(applyToggles, 600);
 })();
