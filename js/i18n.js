@@ -231,6 +231,25 @@ const I18N = {
       endCoins: "💰 Coins", endAch: "🏆 Achievements", endQuests: "📜 Quests",
     },
     projects: {
+      mc: {
+        title: "Handwritten Minecraft", type: "3D Voxel Sandbox · Built from scratch",
+        tags: ["Voxel Terrain", "Chunk Meshing", "Lighting & Day/Night", "Save & Load"],
+        short: "A block world written line by line in C++ and modern OpenGL, starting from an empty window — terrain, lighting, water, day/night, digging, placing and saves, all implemented by hand.",
+        desc: [
+          "No game engine — just an empty window and an OpenGL context. Terrain is generated with Perlin noise, blocks are managed in chunks, and only the visible faces are ever meshed and sent to the GPU. From that foundation, the world slowly grows hills, seas and forests.",
+          "Everything built on top is hand-written too: a first-person camera with collision, raycast digging and placing, a hotbar and inventory, translucent water and fog, a day/night sky that shifts with time, plus seed-based world generation with save and load — no ready-made framework underneath.",
+        ],
+        mediaLabels: ["The whole world from above", "Waterline and shore", "Forest panorama", "Day, night and sky", "First person · dig & place", "Inventory · all the blocks", "Title screen"],
+        mediaTexts: [
+          "Looking back from high up: hills laid out by Perlin noise, low ground flooded with water, scattered trees, the distance softly closed off by fog. Chunks load around the player, and every hidden face is culled away — only the triangles that actually need drawing remain.",
+          "A stretch of shoreline: water is a translucent block, and you can see the sand and terrain beneath it. Beach, grass and water flow into one another, the edges stepping down block by block.",
+          "A forest panorama from high ground. Tree positions are decided by a hash of coordinates and seed, so the same seed always grows the exact same world — even trees straddling a chunk seam aren't cut in half.",
+          "The same world at night. Sky color and brightness shift smoothly with the time of day — brightest at noon, darkest at midnight, easing through dawn and dusk — and the fog follows the sky.",
+          "What it looks like to actually play: the crosshair marks where you dig, left click breaks, right click places, the hotbar shows the block in hand, and number keys or the scroll wheel switch slots.",
+          "Open the inventory and there's every block the world uses — grass, dirt, stone, log, planks, brick, glass, sand, snow… click one to hold it and drop it into the hotbar.",
+          "The game's title screen. Tiled dirt background, a bitmap-font title and menu buttons — all drawn by the hand-written UI system. New world and load save both start here.",
+        ],
+      },
       project1: {
         title: "Lost-Heart Samurai", type: "2D Pixel Action Adventure",
         tags: ["Pixel Art", "Action Combat", "Boss Fights", "Level Design"],
@@ -478,6 +497,25 @@ const I18N = {
       endCoins: "💰 コイン", endAch: "🏆 実績", endQuests: "📜 クエスト",
     },
     projects: {
+      mc: {
+        title: "手書きの Minecraft", type: "3D ボクセルサンドボックス · フルスクラッチ",
+        tags: ["ボクセル地形", "チャンクメッシュ", "ライティング／昼夜", "セーブ＆ロード"],
+        short: "空のウィンドウから、C++ と現代 OpenGL で一行ずつ書き上げたブロックの世界。地形・光・水・昼夜・破壊と設置・セーブ、すべて自前で実装。",
+        desc: [
+          "ゲームエンジンは使わず、空のウィンドウと OpenGL コンテキストだけ。地形はパーリンノイズで生成し、ブロックはチャンク単位で管理、見えている面だけをメッシュ化して GPU へ送る。その土台から、山も海も木もある世界を少しずつ育てていく。",
+          "その上も全部手書き：一人称カメラと当たり判定、レイキャストによる破壊と設置、ホットバーとインベントリ、半透明の水と霧、時間で移ろう昼夜の空、そして固定シードのワールド生成とセーブ／ロード。既製のフレームワークには一切頼っていない。",
+        ],
+        mediaLabels: ["世界を上空から俯瞰", "水辺と海岸線", "森のパノラマ", "昼と夜と空の色", "一人称 · 破壊と設置", "インベントリ · ブロック一覧", "タイトル画面"],
+        mediaTexts: [
+          "上空から見返す：パーリンノイズが敷いた丘、水に沈んだ低地、点在する木々、遠くは霧で自然に閉じる。チャンクはプレイヤーの周りで読み込まれ、見えない面はすべて間引かれ、本当に描くべき三角形だけが残る。",
+          "海岸線のひとこま：水は半透明のブロックで、その下の砂や地形が透けて見える。砂浜・草地・水面がなだらかにつながり、縁は高さに沿って一段ずつ噛み合う。",
+          "高台から見た森のパノラマ。木の位置は座標とシードのハッシュで一意に決まるので、同じシードならワールドはいつも寸分たがわず同じに育ち、チャンクの継ぎ目にまたがる木も半分に切れたりしない。",
+          "同じ世界の夜。空の色と明るさは一日の時刻でなめらかに変化し、正午が最も明るく真夜中が最も暗い。夜明けと夕暮れの間も滑らかに移り、霧の色も空に合わせて動く。",
+          "実際に遊んだ様子：画面中央のクロスヘアが狙った場所を指し、左クリックで壊し、右クリックで置く。下のホットバーが手持ちのブロックを表示し、数字キーやスクロールで切り替える。",
+          "インベントリを開けば、この世界で使えるブロックが勢ぞろい——草、土、石、原木、板、レンガ、ガラス、砂、雪……クリックひとつで手に取り、ホットバーへ入れられる。",
+          "ゲームのタイトル画面。土を敷き詰めた背景、ビットマップフォントのタイトルとメニューボタン——すべて自作の UI システムで描いている。新規ワールドもセーブ読み込みも、ここから始まる。",
+        ],
+      },
       project1: {
         title: "失心武士", type: "2D ドット絵アクションアドベンチャー",
         tags: ["ドット絵", "アクション戦闘", "ボス戦", "レベルデザイン"],
