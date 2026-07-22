@@ -2,7 +2,7 @@
  * 多语言 zh / en / ja
  * - zh 的项目内容直接用 projects.js 里的原文
  * - en / ja 在 projects 里覆写 title / type / short / desc / mediaLabels
- * - 首次访问自动读取系统语言，之后记住用户选择
+ * - 首次访问默认日文，之后记住用户选择
  * ============================================================ */
 
 const I18N = {
@@ -15,19 +15,18 @@ const I18N = {
       story1: "平静的颜料王国里，<b>公主被魔王抓走了！</b>",
       story2: "传说魔王城的大门需要 <b class='gold-txt'>3 把钥匙 🔑</b>，<br>而钥匙就藏在三份 <b>BOSS 级任务档案</b>的最深处。",
       story3: "读完档案即可拔出钥匙。收集金币、解锁成就，<br>顺便……认识一下这个世界的作者。",
-      startHint: "🖱 鼠标划过屏幕试试 —— 背景是可以画画的",
+      startHint: "（因为网站会渲染流体。手机可能会发烫）",
       navStats: "角色", navMain: "主线", navSide: "支线", navGate: "魔王城",
       heroKicker: "STAGE 1 · 颜料王国 · 出发的村庄",
       heroLine: "～ 被夺走的<em>公主</em> ～",
-      heroSub: "游戏开发者 · 像素画师 · 3D 创作者 —— 以及这个王国的勇者（兼作者）。",
+      heroSub: "一位兴趣创作者 以及这个世界的勇者",
       objTag: "当前目标",
       objText: "集齐 <b>3 把钥匙 🔑</b> 打开魔王城 · 完成 BOSS 级任务档案即可获得",
       scrollCue: "向下探索地图",
       secStatus: "勇者面板",
-      skill1: "游戏开发", skill2: "像素美术", skill3: "数字绘画", skill4: "Blender 3D", skill5: "AI / LLM 应用",
-      statBadge: "称号 · 失心武士的锻造者",
-      statP1: "独立开发者一枚：从像素动画、战斗手感到 Boss AI 都自己动手；画画时喜欢把颜色开到最大，捏模型时喜欢给裙子多加三层褶。",
-      statP2: "相信「玩」是最快的了解方式——所以救公主的路上，你顺便就把我认识了。",
+      skill1: "游戏开发", skill2: "AI / LLM 应用", skill3: "C++", skill4: "C#",
+      statP1: "一位开发者，喜欢从头开始自己动手，把脑海里的想法全部变成现实。",
+      statP2: "相信「玩」是最好的了解方式，所以，救出公主吧！",
       secMain: "主线任务",
       secMainSub: "三份 BOSS 级任务档案，每读完一份，就能拔出一把魔王城的钥匙 🔑",
       secSide: "支线任务",
@@ -129,19 +128,18 @@ const I18N = {
       story1: "In the peaceful Kingdom of Paint, <b>the Princess has been kidnapped by the Demon King!</b>",
       story2: "Legend says the castle gate needs <b class='gold-txt'>3 keys 🔑</b>,<br>hidden deep inside three <b>BOSS-class quest files</b>.",
       story3: "Read a file to pull out its key. Collect coins, unlock achievements —<br>and get to know the author of this world along the way.",
-      startHint: "🖱 Move your mouse — the background is a canvas you can paint on",
+      startHint: "(This site renders a fluid simulation — phones may get warm.)",
       navStats: "Status", navMain: "Main", navSide: "Side", navGate: "Castle",
       heroKicker: "STAGE 1 · KINGDOM OF PAINT · STARTING VILLAGE",
       heroLine: "~ The Stolen <em>Princess</em> ~",
-      heroSub: "Game developer · Pixel artist · 3D creator — and the hero (also author) of this kingdom.",
+      heroSub: "A hobbyist creator — and the hero of this world",
       objTag: "OBJECTIVE",
       objText: "Collect <b>3 keys 🔑</b> to open the Demon Castle · finish BOSS-class quest files to earn them",
       scrollCue: "Scroll to explore the map",
       secStatus: "Hero Status",
-      skill1: "Game Dev", skill2: "Pixel Art", skill3: "Painting", skill4: "Blender 3D", skill5: "AI / LLM",
-      statBadge: "Title · Forger of the Lost-Heart Samurai",
-      statP1: "Indie developer: pixel animation, combat feel and boss AI all hand-made. I paint with the saturation cranked to max, and always give skirts three extra layers of frills.",
-      statP2: "I believe playing is the fastest way to know someone — so you'll get to know me on the way to saving the princess.",
+      skill1: "Game Dev", skill2: "AI / LLM", skill3: "C++", skill4: "C#",
+      statP1: "A developer who loves building from scratch, turning every idea in their head into reality.",
+      statP2: "I believe playing is the best way to know someone — so go save the princess!",
       secMain: "Main Quests",
       secMainSub: "Three BOSS-class quest files. Finish reading one, pull out one castle key 🔑",
       secSide: "Side Quests",
@@ -377,19 +375,18 @@ const I18N = {
       story1: "平和な絵の具王国で、<b>姫が魔王にさらわれた！</b>",
       story2: "魔王城の門を開くには <b class='gold-txt'>3本の鍵 🔑</b> が必要。<br>鍵は3つの<b>BOSS級クエストファイル</b>の奥深くに眠っている。",
       story3: "ファイルを読み終えれば鍵が手に入る。コインを集め、実績を解除し、<br>ついでに……この世界の作者と仲良くなろう。",
-      startHint: "🖱 マウスを動かしてみて —— 背景はお絵かきできるキャンバス",
+      startHint: "（サイトは流体シミュレーションを描画するため、スマホが熱くなる場合があります）",
       navStats: "ステータス", navMain: "メイン", navSide: "サイド", navGate: "魔王城",
       heroKicker: "STAGE 1 · 絵の具王国 · はじまりの村",
       heroLine: "～ 奪われた<em>姫</em> ～",
-      heroSub: "ゲーム開発者 · ドット絵師 · 3Dクリエイター —— そしてこの王国の勇者（兼作者）。",
+      heroSub: "趣味クリエイター、そしてこの世界の勇者",
       objTag: "現在の目標",
       objText: "<b>3本の鍵 🔑</b> を集めて魔王城を開けよう · BOSS級ファイルを読破すると入手",
       scrollCue: "下へスクロールして探索",
       secStatus: "勇者ステータス",
-      skill1: "ゲーム開発", skill2: "ドット絵", skill3: "デジタル絵画", skill4: "Blender 3D", skill5: "AI / LLM",
-      statBadge: "称号 · 失心武士の鍛冶師",
-      statP1: "インディー開発者です。ドットアニメ、戦闘の手触り、ボスAIまで全部自作。絵を描くときは彩度を最大に、モデリングではスカートにフリルを三段多めに。",
-      statP2: "「遊ぶ」ことが一番早い自己紹介だと信じています——姫を救う道すがら、私のことも知ってもらえたら。",
+      skill1: "ゲーム開発", skill2: "AI / LLM", skill3: "C++", skill4: "C#",
+      statP1: "一から自分の手で作り上げるのが好きな開発者。頭の中のアイデアを、全部現実にしていきます。",
+      statP2: "「遊ぶ」ことが最高の自己紹介だと信じています。さあ、姫を救い出そう！",
       secMain: "メインクエスト",
       secMainSub: "BOSS級クエストファイルは3つ。1つ読み終えるごとに、魔王城の鍵を1本入手 🔑",
       secSide: "サイドクエスト",
@@ -617,16 +614,13 @@ const I18N = {
   },
 };
 
-/* 语言选择：记忆 > 系统语言 > 英语 */
+/* 语言选择：记忆 > 默认日文 */
 function detectLang() {
   try {
     const savedLang = localStorage.getItem("konako_lang");
     if (savedLang && I18N[savedLang]) return savedLang;
   } catch (e) {}
-  const nav = (navigator.language || "en").toLowerCase();
-  if (nav.startsWith("zh")) return "zh";
-  if (nav.startsWith("ja")) return "ja";
-  return "en";
+  return "ja";
 }
 const LANG = detectLang();
 
