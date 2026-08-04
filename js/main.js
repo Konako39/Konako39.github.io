@@ -11,13 +11,27 @@
   const MAINS = PROJECTS.filter((p) => p.featured);
   const SIDES = PROJECTS.filter((p) => !p.featured);
   const KEYS_NEEDED = MAINS.length;
+  // 钥匙数量 = 主线项目数量，文案里的数字统一由这里插值，加项目不用改三份翻译
+  const COUNTS = { n: KEYS_NEEDED, m: KEYS_NEEDED };
+
+  /* 低开销模式：触屏 / 窄屏 / 省流 / 明确要求减少动效的设备。
+     这类设备上一律不铺常驻动画层（颗粒、飘浮粒子、无限发光循环）。 */
+  const LOW_FX =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    window.matchMedia("(pointer: coarse)").matches ||
+    window.innerWidth < 900 ||
+    !!(navigator.connection && navigator.connection.saveData);
+  if (LOW_FX) document.body.classList.add("low-fx");
+
+  const FLUID = () => window.FluidFX || {};
+  function fluidHold(id, on) { if (FLUID().hold) FLUID().hold(id, on); }
 
   /* ================= 静态文案注入 ================= */
   document.documentElement.lang = { zh: "zh-CN", en: "en", ja: "ja" }[LANG];
   document.title = T("htmlTitle");
   if (LANG === "ja") document.body.classList.add("lang-ja");
-  $$("[data-i18n]").forEach((el) => { el.textContent = T(el.dataset.i18n); });
-  $$("[data-i18n-html]").forEach((el) => { el.innerHTML = T(el.dataset.i18nHtml); });
+  $$("[data-i18n]").forEach((el) => { el.textContent = T(el.dataset.i18n, COUNTS); });
+  $$("[data-i18n-html]").forEach((el) => { el.innerHTML = T(el.dataset.i18nHtml, COUNTS); });
   $$(".lang-switch button").forEach((b) => {
     if (b.dataset.lang === LANG) b.classList.add("cur");
     b.addEventListener("click", () => {
@@ -112,25 +126,57 @@
     setTimeout(() => el.remove(), 1100);
   }
 
-  function scrollProgress() {
-    const doc = document.documentElement;
-    const max = doc.scrollHeight - window.innerHeight;
-    return max > 0 ? Math.min(1, window.scrollY / max) : 0;
+  /* 滚动进度：scrollHeight 会触发强制重排，所以只在尺寸变化时量一次，
+     滚动过程中读缓存值。 */
+  let scrollMax = 0;
+  function measureScroll() {
+    scrollMax = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
   }
-  function renderHUD() {
-    const p = scrollProgress();
-    const level = 1 + Math.floor(p * 4 + xp / 500);
-    hudLevel.textContent = level;
-    hudExpFill.style.width = (((p * 4 + xp / 500) % 1) * 100).toFixed(1) + "%";
+  function scrollProgress() {
+    return scrollMax > 0 ? Math.min(1, window.scrollY / scrollMax) : 0;
+  }
+  measureScroll();
+  window.addEventListener("resize", measureScroll, { passive: true });
+  if (window.ResizeObserver) new ResizeObserver(measureScroll).observe(document.body);
+
+  // 钥匙格子只在数量变化时重建，不再每次滚动都重写一遍 innerHTML
+  let keysRendered = -1;
+  function renderKeys() {
+    const got = keysOwned();
+    if (got === keysRendered) return;
+    keysRendered = got;
     $("#hud-keys").innerHTML = MAINS.map((m) =>
       '<span class="key ' + (save.quests[m.id] ? "on" : "") + '">🔑</span>'
     ).join("");
   }
-  window.addEventListener("scroll", () => {
+  let lastLevel = -1;
+  function renderHUD() {
+    const v = scrollProgress() * 4 + xp / 500;
+    const level = 1 + Math.floor(v);
+    if (level !== lastLevel) { lastLevel = level; hudLevel.textContent = level; }
+    hudExpFill.style.width = ((v % 1) * 100).toFixed(1) + "%";
+    renderKeys();
+  }
+
+  /* 滚动事件在移动端一帧能来好几次，全部折叠到一次 rAF 里处理 */
+  let scrollQueued = false;
+  let dimmed = false;
+  function onScrollFrame() {
+    scrollQueued = false;
     renderHUD();
-    // 滚过首屏一半后调暗背景，保证正文可读
-    document.body.classList.toggle("dim-bg", window.scrollY > window.innerHeight * 0.55);
+    // 滚过首屏一半后调暗背景，保证正文可读（变暗在流体着色器里做，不叠 CSS filter）
+    const shouldDim = window.scrollY > window.innerHeight * 0.55;
+    if (shouldDim !== dimmed) {
+      dimmed = shouldDim;
+      document.body.classList.toggle("dim-bg", shouldDim);
+      if (FLUID().setDim) FLUID().setDim(shouldDim ? 0.55 : 1);
+    }
     if (scrollProgress() > 0.96) achieve("explore");
+  }
+  window.addEventListener("scroll", () => {
+    if (scrollQueued) return;
+    scrollQueued = true;
+    requestAnimationFrame(onScrollFrame);
   }, { passive: true });
 
   function keysOwned() { return MAINS.filter((m) => save.quests[m.id]).length; }
@@ -236,8 +282,9 @@
       el.className = "featured-card reveal" + (done ? " done" : "");
       el.id = "card-" + p.id;
       el.innerHTML = `
+        <div class="boss-glow"></div>
         <div class="featured-media">
-          <img src="${p.thumb}" alt="${LP(p, "title")}" loading="lazy">
+          <img src="${p.thumb}" alt="${LP(p, "title")}" loading="${i === 0 ? "eager" : "lazy"}" decoding="async" fetchpriority="${i === 0 ? "high" : "low"}">
           <div class="featured-frame"></div>
           <div class="boss-tag">${T("bossTag")} ${String(i + 1).padStart(2, "0")}</div>
           <div class="key-tag">${done ? T("keyTagDone") : T("keyTagHas")}</div>
@@ -268,12 +315,12 @@
       el.style.transitionDelay = (i * 0.08) + "s";
       el.innerHTML = `
         <div class="side-media">
-          <img src="${p.thumb}" alt="${LP(p, "title")}" loading="lazy">
+          <img src="${p.thumb}" alt="${LP(p, "title")}" loading="lazy" decoding="async">
           <div class="side-num">SIDE QUEST ${String(i + 1).padStart(2, "0")}</div>
           <div class="done-stamp">${T("doneStamp")}</div>
         </div>
         <div class="side-body">
-          <h4 class="side-title"><img class="side-icon" src="${p.icon}" alt="" loading="lazy">${LP(p, "title")}</h4>
+          <h4 class="side-title"><img class="side-icon" src="${p.icon}" alt="" loading="lazy" decoding="async" width="26" height="26">${LP(p, "title")}</h4>
           <div class="type-line">${LP(p, "type")}</div>
           <p class="side-desc">${LP(p, "short")}</p>
           ${techRow(p)}
@@ -338,7 +385,8 @@
     setTimeout(() => document.body.classList.remove("shake"), 500);
   }
   function spawnEmbers() {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // 14 个 fixed + blur + mix-blend-mode 的粒子在手机上是纯粹的常驻合成开销，直接不生成
+    if (LOW_FX) return;
     const hues = ["#ff4e00", "#e900ff", "#00e5ff", "#b8ff00", "#ffb300"];
     for (let i = 0; i < 14; i++) {
       const d = document.createElement("div");
@@ -378,7 +426,7 @@
     } else {
       btn.disabled = true;
       btn.textContent = T("gateLocked", { n: got, m: KEYS_NEEDED });
-      $("#gate-desc").textContent = T("gateDesc");
+      $("#gate-desc").textContent = T("gateDesc", COUNTS);
     }
   }
 
@@ -463,7 +511,7 @@
       <div class="stage-scroll" style="--acc:${p.accent || "#ffb300"}">
         <button class="stage-back">← ${T("backToMap")}</button>
         <header class="st-hero">
-          <img class="st-hero-bg" src="${p.thumb}" alt="">
+          <img class="st-hero-bg" src="${p.hero || p.thumb}" alt="" decoding="async" fetchpriority="high">
           <div class="st-hero-grad"></div>
           <div class="st-hero-inner">
             <div class="quest-line">${p.featured ? "MAIN QUEST" : "SIDE QUEST"} · ${T("modalFile")}</div>
@@ -490,6 +538,7 @@
     stage.classList.add("open");
     stage.scrollTop = 0;
     document.body.style.overflow = "hidden";
+    fluidHold("stage", true);   // 档案页盖住整屏，流体停机
     armVibeBars(stage);
     achieve("intel");
     if (window.FluidFX.ready) window.FluidFX.burst(4);
@@ -508,6 +557,7 @@
     stage.innerHTML = "";
     stageId = null;
     document.body.style.overflow = "";
+    fluidHold("stage", false);
     if (!skipHistory && location.hash.startsWith("#p/")) {
       history.pushState(null, "", location.pathname + location.search);
     }
@@ -537,9 +587,14 @@
     $("#lb-caption").textContent =
       (lbIndex + 1) + " / " + stageGallery.length + " · " + LPMedia(p, item.i);
     lightbox.classList.add("open");
+    fluidHold("lightbox", true);
   }
   function stepLightbox(d) { openLightbox(lbIndex + d); }
-  function closeLightbox() { lightbox.classList.remove("open"); $("#lb-img").src = ""; }
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    $("#lb-img").src = "";
+    fluidHold("lightbox", false);
+  }
 
   /* ================= 商店 ================= */
   const SHOP_ITEMS = [
@@ -573,7 +628,13 @@
   }
 
   function applyToggles() {
-    if (window.FluidFX.ready) window.FluidFX.setBrush(save.shopOn.brush ? 2.6 : 1);
+    const fx = FLUID();
+    if (fx.ready) {
+      fx.setBrush(save.shopOn.brush ? 2.6 : 1);
+      // 彩虹在流体着色器里做色相旋转；以前是给整块画布套 CSS hue-rotate 动画，
+      // 那等于每帧多一次全屏滤镜合成。
+      fx.setRainbow(!!save.shopOn.rainbow);
+    }
     document.body.classList.toggle("rainbow", !!save.shopOn.rainbow);
   }
 
@@ -662,6 +723,7 @@
     lines.innerHTML = ""; stats.innerHTML = ""; actions.innerHTML = "";
     ending.classList.add("open");
     document.body.style.overflow = "hidden";
+    fluidHold("ending", true);
     screenFlash();
     screenShake();
     achieve("hero");
@@ -693,6 +755,7 @@
   function closeEnding() {
     $("#ending").classList.remove("open");
     document.body.style.overflow = "";
+    fluidHold("ending", false);
     renderGate();
   }
 

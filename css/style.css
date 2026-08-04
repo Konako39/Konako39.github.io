@@ -17,6 +17,7 @@
   --font-px: "Press Start 2P", monospace;
   --font-cn: "ZCOOL KuaiLe", "Noto Sans SC", sans-serif;
   --font-body: "Noto Sans SC", sans-serif;
+  --glass: blur(10px);      /* 毛玻璃；低开销模式下整体关闭 */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -49,10 +50,9 @@ a { color: inherit; text-decoration: none; }
   width: 100vw;
   height: 100vh;
   z-index: 0;
-  transition: filter 0.8s ease;
 }
-/* 滚过首屏后自动调暗背景，保证正文可读；回到顶部恢复全力演出 */
-body.dim-bg #fluid { filter: brightness(0.55) saturate(0.85); }
+/* 滚过首屏后调暗背景保证正文可读——这一步现在在流体着色器里做（uDim），
+   不再给整块画布挂 CSS filter，那等于每帧多一次全屏合成。 */
 body.dim-bg .ember { filter: blur(1px) brightness(0.5); }
 /* WebGL 不可用时的降级背景 */
 body.no-fluid #fluid { display: none; }
@@ -86,7 +86,7 @@ main, .hud { position: relative; z-index: 2; }
   display: grid;
   place-items: center;
   background: rgba(10, 7, 24, 0.55);
-  backdrop-filter: blur(6px);
+  backdrop-filter: var(--glass);
   transition: opacity 0.8s ease, visibility 0.8s;
 }
 #start-screen.gone { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -355,7 +355,7 @@ section, footer#contact {
   grid-template-columns: 1fr 1fr;
   gap: 40px;
   background: var(--paper);
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--glass);
   border: 2px solid var(--line);
   border-radius: 18px;
   padding: 40px;
@@ -415,19 +415,29 @@ section, footer#contact {
   grid-template-columns: 1.25fr 1fr;
   gap: 0;
   background: var(--paper);
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--glass);
   border: 3px solid rgba(255, 179, 0, 0.5);
   border-radius: 20px;
   overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 0 6px rgba(255, 78, 0, 0.10), 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 46px rgba(255, 78, 0, 0.14);
+}
+/* 呼吸光晕：动 opacity 而不是 box-shadow。box-shadow 关键帧会让每张主线卡
+   每帧重绘一次大面积模糊阴影；opacity 只走合成，GPU 顺手就做了。 */
+.boss-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 3;                 /* 压在图片和信息栏之上，否则会被后面的定位元素盖掉 */
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 6px rgba(255, 78, 0, 0.22), inset 0 0 70px rgba(255, 120, 0, 0.26);
+  opacity: 0;
   animation: bossglow 4s ease-in-out infinite;
 }
+@keyframes bossglow { 50% { opacity: 1; } }
 /* .in 之后才接管 transform 过渡，避免打断 reveal 入场动画 */
 .featured-card.in { transition: transform 0.3s ease; }
 .featured-card.in:hover { transform: translateY(-4px) scale(1.005); }
-@keyframes bossglow {
-  0%, 100% { box-shadow: 0 0 0 6px rgba(255, 78, 0, 0.10), 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 46px rgba(255, 78, 0, 0.14); }
-  50% { box-shadow: 0 0 0 6px rgba(255, 78, 0, 0.22), 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 90px rgba(255, 120, 0, 0.34); }
-}
 .featured-media { position: relative; min-height: 340px; }
 .featured-media img {
   position: absolute;
@@ -482,7 +492,7 @@ section, footer#contact {
 }
 .side-card {
   background: var(--paper);
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--glass);
   border: 2px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
@@ -563,7 +573,7 @@ footer#contact { padding-bottom: 90px; }
 .contact-panel {
   text-align: center;
   background: var(--paper);
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--glass);
   border: 2px solid var(--line);
   border-radius: 18px;
   padding: 50px 30px;
@@ -580,7 +590,7 @@ footer#contact { padding-bottom: 90px; }
   display: none;
   place-items: center;
   background: rgba(8, 6, 18, 0.78);
-  backdrop-filter: blur(8px);
+  backdrop-filter: var(--glass);
   padding: 24px;
 }
 #modal.open { display: grid; }
@@ -693,7 +703,7 @@ footer#contact { padding-bottom: 90px; }
   font-size: 15px;
   color: var(--txt);
   background: rgba(10, 7, 24, 0.8);
-  backdrop-filter: blur(8px);
+  backdrop-filter: var(--glass);
   border: 2px solid var(--line);
   border-radius: 10px;
   padding: 10px 18px;
@@ -841,7 +851,7 @@ footer#contact { padding-bottom: 90px; }
   display: none;
   place-items: center;
   background: rgba(5, 4, 12, 0.94);
-  backdrop-filter: blur(6px);
+  backdrop-filter: var(--glass);
 }
 #lightbox.open { display: grid; }
 #lb-img {
@@ -1120,7 +1130,7 @@ section { position: relative; }
   background:
     radial-gradient(60% 100% at 50% 100%, rgba(120, 0, 60, 0.35), transparent),
     var(--paper);
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--glass);
   border: 3px solid rgba(233, 0, 255, 0.4);
   border-radius: 20px;
   padding: 50px 30px 56px;
@@ -1163,7 +1173,7 @@ section { position: relative; }
   display: none;
   place-items: center;
   background: rgba(6, 4, 14, 0.92);
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--glass);
   overflow-y: auto;
   padding: 40px 20px;
 }
@@ -1226,7 +1236,7 @@ body.lang-ja .sec-title, body.lang-ja .featured-title, body.lang-ja .side-title,
 body.lang-ja .modal-title, body.lang-ja .contact-line, body.lang-ja .quest-toggle,
 body.lang-ja .toast-title, body.lang-ja .el, body.lang-ja .slot-text {
   font-family: "Noto Sans JP", sans-serif;
-  font-weight: 900;
+  font-weight: 700;
 }
 .lang-switch { display: flex; gap: 6px; justify-content: center; margin-bottom: 22px; }
 .lang-switch button {
@@ -1356,7 +1366,7 @@ body.lang-ja .toast-title, body.lang-ja .el, body.lang-ja .slot-text {
   display: none;
   place-items: center;
   background: rgba(8, 6, 18, 0.78);
-  backdrop-filter: blur(8px);
+  backdrop-filter: var(--glass);
   padding: 24px;
 }
 #shop.open { display: grid; }
@@ -1437,7 +1447,7 @@ body.lang-ja .toast-title, body.lang-ja .el, body.lang-ja .slot-text {
   display: none;
   place-items: center;
   background: rgba(8, 6, 18, 0.8);
-  backdrop-filter: blur(8px);
+  backdrop-filter: var(--glass);
   padding: 24px;
 }
 #letter.open { display: grid; }
@@ -1456,9 +1466,8 @@ body.lang-ja .toast-title, body.lang-ja .el, body.lang-ja .slot-text {
 .letter-body { line-height: 2.05; font-size: 15px; margin-bottom: 24px; }
 .letter-panel .btn-ghost { color: #4a3218; border-color: #d9a860; background: rgba(255,255,255,0.5); }
 
-/* 彩虹秘技模式 */
-body.rainbow #fluid { filter: hue-rotate(0deg) saturate(1.6); animation: rainbowspin 4s linear infinite; }
-@keyframes rainbowspin { to { filter: hue-rotate(360deg) saturate(1.6); } }
+/* 彩虹秘技模式：色相旋转同样交给流体着色器（uHue），
+   原来的 hue-rotate 关键帧动画会让整屏画布每帧重新走一遍滤镜。 */
 
 /* ---------------- 全屏特效 ---------------- */
 #fx-flash {
@@ -1518,4 +1527,48 @@ body.shake main, body.shake .hud { animation: shakeit 0.45s cubic-bezier(0.36, 0
   html { scroll-behavior: auto; }
   .reveal { transition: none; opacity: 1; transform: none; }
   .hero-title { animation: none; }
+}
+
+/* ============================================================
+ * 低开销模式（body.low-fx，由 main.js 按设备判定：触屏 / 窄屏 /
+ * 省流量 / 用户要求减少动效）
+ *
+ * 手机发烫的来源不是某一处，而是一堆常驻开销叠在一起：
+ *   · 全屏 mix-blend-mode 颗粒层 —— 逼着整页走离屏合成
+ *   · 十几处 backdrop-filter    —— 每个都是一次实时高斯模糊
+ *   · 若干无限循环的 box-shadow / background-position 动画 —— 每帧重绘
+ *   · 一直在跑的浮动粒子
+ * 展示内容一个像素都不砍，只把这些「一直在烧电」的装饰层关掉。
+ * ============================================================ */
+body.low-fx {
+  --glass: none;                          /* 关掉全部毛玻璃 */
+  --paper: rgba(18, 13, 38, 0.94);        /* 没有模糊了，底板补一点不透明度保证可读 */
+}
+body.low-fx .canvas-grain { display: none; }
+body.low-fx .ember { display: none; }
+/* 遮罩原本靠模糊压住底下的流体，模糊没了就补不透明度，别让正文变糊 */
+body.low-fx #start-screen { background: rgba(10, 7, 24, 0.88); }
+body.low-fx #shop,
+body.low-fx #letter,
+body.low-fx #modal { background: rgba(8, 6, 18, 0.93); }
+body.low-fx .quest-toggle { background: rgba(10, 7, 24, 0.95); }
+
+/* 无限循环的重绘型动画：一律停在最终态，静态效果保持不变 */
+body.low-fx .boss-glow { animation: none; opacity: 0.55; }
+body.low-fx .hero-title {
+  animation: heroin 1.2s cubic-bezier(0.2, 0.9, 0.25, 1.2) both;
+  background-position: 30% 0;
+  filter: drop-shadow(0 6px 0 rgba(0, 0, 0, 0.65));   /* 46px 模糊的第二层阴影太贵 */
+}
+body.low-fx .st-hero-bg { animation: none; }          /* Ken Burns 缓推 */
+body.low-fx .vibe-fill::after { animation: none; opacity: 0; }
+body.low-fx .gate-castle { animation: none; }
+body.low-fx .gate-slot.on { animation: none; }
+body.low-fx .side-card.slot .slot-q { animation: none; }
+body.low-fx .start-hint { animation: none; }
+
+/* 长图库分块渲染：视口外的展示行不进入布局与绘制 */
+body.low-fx .st-row {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 460px;
 }
